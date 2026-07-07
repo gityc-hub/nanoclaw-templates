@@ -52,6 +52,8 @@ Templates live under a **category** folder, one folder per template:
 For example:
 
 ```
+research/
+└── analyst/    # Research analyst: Exa + Firecrawl + Notion research stack
 sales/
 └── sdr/        # Sales Development Representative agent
 ```
