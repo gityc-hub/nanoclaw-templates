@@ -103,21 +103,33 @@ Notes for template authors:
   The entire folder is copied, so place `SKILL.md` and any `references/*.md`
   inside it per the skills convention.
 - Each immediate Markdown file under `tasks/` defines one recurring task. The
-  filename becomes the task name, `schedule` is a cron expression, and the body
-  is the prompt:
+  filename becomes the task name, `schedule` is a cron expression, an optional
+  `script` can decide whether to wake the agent, and the body is the prompt:
 
   ```markdown
   ---
-  schedule: "0 9 * * 1-5"
+  schedule: "*/15 * * * *"
+  script: |
+    if [ -f /workspace/agent/wake-next-task ]; then
+      echo '{"wakeAgent": true}'
+    else
+      echo '{"wakeAgent": false}'
+    fi
   ---
 
-  Review the pipeline and prepare the weekday sales briefing.
+  Handle the condition reported by the script.
   ```
 
-  Only `schedule` is accepted in the frontmatter. Tasks are validated when the
-  template is stamped, use the NanoClaw install timezone, and start paused. List
-  them with `ncl tasks list --group <agent-group-id> --status paused` and enable
-  one with `ncl tasks resume <task-id>`.
+  `schedule` is required. `script` is optional and may be a single-line or
+  multiline YAML string. No other frontmatter fields are accepted. Scripts use
+  NanoClaw's normal scheduled-task behavior; see
+  [Scheduled Tasks](https://github.com/nanocoai/nanoclaw/blob/main/docs/scheduled-tasks.md#script-gates)
+  for the contract, testing workflow, limits, and failure behavior.
+
+  Tasks are validated when the template is stamped, use the NanoClaw install
+  timezone, and start paused. List them with
+  `ncl tasks list --group <agent-group-id> --status paused` and enable one with
+  `ncl tasks resume <task-id>`.
 - **Never commit secrets.** `.mcp.json` carries `command` + `args` only.
   Credentials are injected at request time by the OneCLI gateway. See a
   template's own README (e.g. [`sales/sdr/README.md`](sales/sdr/README.md)) for

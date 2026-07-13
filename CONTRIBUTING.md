@@ -37,6 +37,7 @@ Templates are public. Never commit API keys, tokens, or any credential.
 
 - `.mcp.json` carries `command` and `args` only. Do not add an `env` block with
   real keys.
+- Task scripts may call external services, but must not contain credentials.
 - Credentials are injected at request time by the OneCLI gateway, not baked into
   the template. If your template needs a service connected, document how to get
   the key and which scopes it needs in the template's own `README.md` (see
@@ -63,7 +64,9 @@ Templates are public. Never commit API keys, tokens, or any credential.
    ncl groups create --template <category>/<template> --name "Test"
    ```
    If the template defines tasks, confirm they appear paused with
-   `ncl tasks list --status paused`.
+   `ncl tasks list --status paused`. For a scripted task, also run it once
+   with `ncl tasks run <task-id>` and inspect it with
+   `ncl tasks get <task-id>`.
 6. Re-check the diff for any secret before you commit.
 7. Open a PR describing what the template does, including any predefined tasks
    and MCP servers it expects.
@@ -73,7 +76,8 @@ Templates are public. Never commit API keys, tokens, or any credential.
 - [ ] Template lives under an appropriate `<category>/<template>/`.
 - [ ] `context/instructions.md` is present.
 - [ ] `.mcp.json` has no secrets (command and args only).
-- [ ] Every `tasks/*.md` file has only `schedule` frontmatter and a prompt body.
+- [ ] Every `tasks/*.md` file has a nonempty `schedule`, an optional nonempty
+      `script`, no other frontmatter fields, and a prompt body.
 - [ ] A per-template `README.md` explains the template and its credentials.
 - [ ] Stamped and tested locally with a bare ref (via `NANOCLAW_TEMPLATES_DIR`
       or a copy into `templates/`).
