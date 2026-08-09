@@ -93,6 +93,31 @@ function checkMcp(tpl, dir) {
   }
 }
 
+// Mirrors the loader's strict task frontmatter: schedule required, script
+// optional, no other fields, nonempty prompt body.
+function checkTasks(tpl, dir) {
+  const tasksDir = path.join(dir, 'ai.nanoco.nanoclaw', 'tasks');
+  if (!isDir(tasksDir)) return;
+  for (const entry of fs.readdirSync(tasksDir, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.md')) continue;
+    const rel = `ai.nanoco.nanoclaw/tasks/${entry.name}`;
+    const lines = fs.readFileSync(path.join(tasksDir, entry.name), 'utf8').split(/\r?\n/);
+    const closing = lines[0] === '---' ? lines.indexOf('---', 1) : -1;
+    if (closing === -1) {
+      fail(tpl, `${rel} must start with --- frontmatter (schedule, optional script)`);
+      continue;
+    }
+    const frontmatter = lines.slice(1, closing);
+    // Top-level keys only: continuation lines of a block scalar are indented.
+    const keys = frontmatter.filter((l) => /^[A-Za-z_-]+\s*:/.test(l)).map((l) => l.split(':')[0].trim());
+    if (!keys.includes('schedule')) fail(tpl, `${rel} frontmatter is missing "schedule"`);
+    for (const key of keys) {
+      if (key !== 'schedule' && key !== 'script') fail(tpl, `${rel} frontmatter accepts only schedule and script (found "${key}")`);
+    }
+    if (!lines.slice(closing + 1).join('\n').trim()) fail(tpl, `${rel} prompt body is empty`);
+  }
+}
+
 function checkSkills(tpl, dir) {
   const skillsDir = path.join(dir, 'skills');
   if (!isDir(skillsDir)) return;
@@ -135,6 +160,7 @@ for (const category of fs.readdirSync(ROOT, { withFileTypes: true })) {
     checkManifest(tpl, dir);
     checkMcp(tpl, dir);
     checkSkills(tpl, dir);
+    checkTasks(tpl, dir);
     if (fs.existsSync(path.join(dir, '.mcp.json'))) fail(tpl, '.mcp.json is the legacy name; use mcp.json');
     // Registry policy, not a NanoClaw parser rule: first-party templates ship a persona.
     const persona = path.join(dir, 'ai.nanoco.nanoclaw', 'context', 'instructions.md');

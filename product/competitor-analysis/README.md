@@ -139,16 +139,18 @@ template ships it with a non-secret placeholder:
 
 ```json
 "exa": {
+  "type": "stdio",
   "command": "npx",
   "args": ["-y", "exa-mcp-server@3.2.1"],
-  "env": { "EXA_API_KEY": "onecli-managed" }
+  "env": { "EXA_API_KEY": "placeholder" }
 }
 ```
 
 That satisfies startup; the real credential is still injected by the proxy on
-the outbound call to `api.exa.ai`. `onecli-managed` is a placeholder, not a
-secret, so this stays CONTRIBUTING-compliant. If you add another startup-key
-MCP server, give it the same placeholder, never a real key.
+the outbound call to `api.exa.ai`. The literal `"placeholder"` is the one value
+the stamp-time secret lint always accepts, so this stays CONTRIBUTING-compliant.
+If you add another startup-key MCP server, give it the same placeholder, never
+a real key.
 
 ## Hit a snag?
 
