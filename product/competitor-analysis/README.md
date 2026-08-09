@@ -6,17 +6,19 @@ append a row to a tracking spreadsheet.
 
 ## Layout
 
-NanoClaw stamps an agent from the parts of this folder its template parser
-reads (`.mcp.json`, `context/`, `skills/`, and `tasks/`); README.md is not one
-of them.
+NanoClaw stamps an agent from the parts of this folder its plugin reader
+loads (`mcp.json`, `skills/`, and the `ai.nanoco.nanoclaw/` extension dir);
+README.md is not one of them.
 
 ```
 competitor-analysis/
-├── .mcp.json                       # MCP servers: Exa (pinned); the rest are REST APIs via OneCLI
-├── context/
-│   └── instructions.md             # REQUIRED: the agent's standing brief + config placeholders
-├── tasks/
-│   └── weekly-competitor-review.md # weekly review task (created PAUSED)
+├── plugin.json                     # Agent Plugins manifest (marks the folder as a plugin)
+├── mcp.json                        # MCP servers: Exa (pinned); the rest are REST APIs via OneCLI
+├── ai.nanoco.nanoclaw/
+│   ├── context/
+│   │   └── instructions.md         # the agent's standing brief + config placeholders
+│   └── tasks/
+│       └── weekly-competitor-review.md # weekly review task (created PAUSED)
 ├── skills/
 │   └── competitor-analysis/        # one skill: the research workflow (auto-triggers by task)
 │       ├── SKILL.md                #   entry: operating logic + routing to the references below
@@ -44,7 +46,7 @@ The agent defaults to Claude. To override the provider/model, add an optional
 
 ## Configure before first use
 
-Fill in the placeholders in `context/instructions.md` (or let the agent ask on
+Fill in the placeholders in `ai.nanoco.nanoclaw/context/instructions.md` (or let the agent ask on
 first run):
 
 - **Tracker spreadsheet**: the Google Sheet ID competitor rows are appended to
@@ -71,7 +73,7 @@ and **Google Docs + Sheets**, plus NanoClaw's built-in **`agent-browser`**
 agent containers as env vars. The OneCLI gateway holds your keys in its vault
 and injects them into outbound HTTPS calls at the proxy boundary (including
 the Exa MCP server's calls to `api.exa.ai`). A token never sits in the
-container env, `.mcp.json`, or chat context. Same rule for any MCP server you
+container env, `mcp.json`, or chat context. Same rule for any MCP server you
 add later.
 
 ### 1. Register each credential in the OneCLI vault
