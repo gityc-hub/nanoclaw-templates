@@ -80,7 +80,7 @@ plugin, with the NanoClaw-only slots simply left empty.
 │   └── <name>/                  # optional: one folder per skill (SKILL.md + any references/)
 ├── ai.nanoco.nanoclaw/          # NanoClaw extension dir (spec §8.2)
 │   ├── context/
-│   │   ├── instructions.md      # the agent's persona (required in THIS registry — see below)
+│   │   ├── instructions.md      # the agent's persona (optional but recommended — see below)
 │   │   └── additional_context/  # optional: extra .md files, referenced from instructions.md by relative path
 │   │       └── *.md
 │   └── tasks/*.md               # optional: recurring tasks, created paused
@@ -92,7 +92,7 @@ plugin, with the NanoClaw-only slots simply left empty.
 | `plugin.json` | Plugin identity (`$schema`, `name`, optional metadata + `extensions`) | **Yes** |
 | `skills/<name>/` | A skill (folder copied whole; `SKILL.md` needs `name` + `description` frontmatter) | No |
 | `mcp.json` → `mcpServers` | MCP tool servers (`stdio` or `streamable-http`) | No |
-| `ai.nanoco.nanoclaw/context/instructions.md` | The agent's persona, prepended to its `CLAUDE.md`/`AGENTS.md` every spawn (system-prompt tier, any provider) | Registry policy (CI-checked); the NanoClaw loader treats it as optional |
+| `ai.nanoco.nanoclaw/context/instructions.md` | The agent's persona, prepended to its `CLAUDE.md`/`AGENTS.md` every spawn (system-prompt tier, any provider) | No (recommended; CI requires it to be non-empty if shipped) |
 | `ai.nanoco.nanoclaw/context/additional_context/*.md` | Extra context, referenced from `instructions.md` by relative path (`additional_context/<file>`) | No |
 | `ai.nanoco.nanoclaw/tasks/*.md` | Recurring scheduled tasks, created paused pending user activation | No |
 
@@ -104,10 +104,10 @@ Notes for template authors:
   alphanumeric, no `--` or `..` runs). An optional
   `extensions["ai.nanoco.nanoclaw"].agentName` sets the stamped agent's
   display name; without it the agent is named after the template folder.
-- **Every template in this registry ships a persona** at
-  `ai.nanoco.nanoclaw/context/instructions.md`. This is registry policy,
-  enforced by CI (`node scripts/check-templates.mjs`), not a NanoClaw parser
-  rule — a persona-less plugin stamps fine, but it is not a useful template.
+- **A persona is recommended, not required.** A plain Agent Plugin with no
+  `ai.nanoco.nanoclaw/` extension dir is accepted as-is. If you do ship
+  `ai.nanoco.nanoclaw/context/instructions.md`, CI
+  (`node scripts/check-templates.mjs`) requires it to be non-empty.
 - **Keep `instructions.md` focused (under ~200 lines).** It is always in the
   agent's prompt, and some providers cap that doc (Codex ~32 KB), so an
   over-long persona gets truncated. Put bulk material in `skills/` or

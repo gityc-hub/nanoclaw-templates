@@ -16,15 +16,15 @@ servers) follow the spec; the NanoClaw-specific parts live in the
 | `plugin.json` | Plugin manifest: `$schema` + `name` (the discovery marker) | **Yes** |
 | `skills/<name>/` | A skill (the whole folder is copied) | No |
 | `mcp.json` → `mcpServers` | MCP tool servers (`stdio` / `streamable-http`, placeholder credentials only) | No |
-| `ai.nanoco.nanoclaw/context/instructions.md` | The agent's standing brief | **Registry policy (CI-checked)** |
+| `ai.nanoco.nanoclaw/context/instructions.md` | The agent's standing brief | No (recommended; non-empty if present) |
 | `ai.nanoco.nanoclaw/context/additional_context/*.md` | Extra context, referenced from `instructions.md` by relative path (`additional_context/<file>`) | No |
 | `ai.nanoco.nanoclaw/tasks/*.md` | Recurring scheduled tasks, created paused | No |
 | `README.md` | Human docs for the template | Recommended |
 
-The presence of `plugin.json` is what marks a folder as a template. The persona
-is a registry requirement, not a NanoClaw parser rule: NanoClaw stamps any
-conformant plugin, but this catalog only accepts templates that ship one. See
-the main [README](README.md#anatomy-of-a-template) for the full anatomy.
+The presence of `plugin.json` is what marks a folder as a template. A plain
+Agent Plugin with no `ai.nanoco.nanoclaw/` extension dir is accepted; shipping a
+persona is recommended so the stamped agent is useful out of the box. See the
+main [README](README.md#anatomy-of-a-template) for the full anatomy.
 
 ## Where it goes: `<category>/<template>/`
 
@@ -53,8 +53,8 @@ Templates are public. Never commit API keys, tokens, or any credential.
 
 1. Fork this repo and create a branch.
 2. Create your template at `<category>/<template>/`.
-3. Write `plugin.json` (the only file NanoClaw requires) and
-   `ai.nanoco.nanoclaw/context/instructions.md` (required by this registry).
+3. Write `plugin.json` (the only required file) and, ideally,
+   `ai.nanoco.nanoclaw/context/instructions.md` (the persona — recommended).
 4. Add what the agent needs: `mcp.json` (placeholder credentials only), any
    `skills/<name>/` folders, optional recurring tasks under
    `ai.nanoco.nanoclaw/tasks/*.md`, and a per-template `README.md` covering

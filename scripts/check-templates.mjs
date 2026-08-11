@@ -5,8 +5,8 @@
  * A template is a <category>/<template>/ directory containing plugin.json.
  * Enforced here:
  *   - plugin.json: exact 1.0.0 $schema, valid name
- *   - persona present (ai.nanoco.nanoclaw/context/instructions.md) — REGISTRY
- *     policy; NanoClaw's own loader treats it as optional
+ *   - persona (ai.nanoco.nanoclaw/context/instructions.md) optional — plain
+ *     Agent Plugins are accepted; if the file exists it must be non-empty
  *   - no legacy layout (context/instructions.md without plugin.json), no .mcp.json
  *   - mcp.json: exact $schema, exactly two top-level fields, declared type on
  *     every server, no credential-shaped env/header values ("placeholder" ok)
@@ -162,10 +162,10 @@ for (const category of fs.readdirSync(ROOT, { withFileTypes: true })) {
     checkSkills(tpl, dir);
     checkTasks(tpl, dir);
     if (fs.existsSync(path.join(dir, '.mcp.json'))) fail(tpl, '.mcp.json is the legacy name; use mcp.json');
-    // Registry policy, not a NanoClaw parser rule: first-party templates ship a persona.
+    // Persona is optional (plain Agent Plugins are accepted); if shipped it must not be empty.
     const persona = path.join(dir, 'ai.nanoco.nanoclaw', 'context', 'instructions.md');
-    if (!fs.existsSync(persona) || !fs.readFileSync(persona, 'utf8').trim()) {
-      fail(tpl, 'persona required: ai.nanoco.nanoclaw/context/instructions.md is missing or empty');
+    if (fs.existsSync(persona) && !fs.readFileSync(persona, 'utf8').trim()) {
+      fail(tpl, 'ai.nanoco.nanoclaw/context/instructions.md exists but is empty');
     }
   }
 }
