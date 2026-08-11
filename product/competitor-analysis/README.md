@@ -28,12 +28,12 @@ competitor-analysis/
 │       │   ├── doc-structure.md
 │       │   ├── doc-writing.md
 │       │   ├── recent-news.md
-│       │   └── spreadsheet.md
+│       │   ├── spreadsheet.md
+│       │   └── troubleshooting.md  #   runbook for install/runtime issues
 │       └── scripts/                #   deterministic Google API formatting helpers
 │           ├── render-section.js
 │           └── style-tracker.js
-├── README.md                       # this file
-└── TROUBLESHOOTING.md              # runbook for install/runtime issues (not parser-read)
+└── README.md                       # this file
 ```
 
 The two `scripts/` helpers run with `bun` inside the agent container and call
@@ -155,4 +155,5 @@ a real key.
 ## Hit a snag?
 
 Install and runtime gotchas (agent never spawns after a manual create; Google
-links 404ing on Telegram) are collected in **`TROUBLESHOOTING.md`**.
+links 404ing on Telegram) are collected in
+**`skills/competitor-analysis/references/troubleshooting.md`**.
