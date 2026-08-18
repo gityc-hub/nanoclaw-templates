@@ -19,11 +19,10 @@ first question.
   person, school, and the like as their own linked concept files. later sessions find the family through the index.
 - **Recurring runs.** The morning brief and week-ahead ship paused and come as standard: confirm
   the time each should fire, update its schedule to match, and resume it (a family can still
-  decline; then leave it paused). The other runs need a clear yes: for each one the family
-  accepts (the onboarding profile asks), create the task with the agreed schedule and the prompt
-  "Follow the `family-assistant` skill's `<capability>` reference and post to the family's group
-  chat." Skip what they decline; some runs wait for their moment anyway (the price watch, for
-  instance, starts when they add their first item).
+  decline; then leave it paused). The other runs need a clear yes: for each one the family accepts
+  (the onboarding profile asks), create the task per the `family-assistant` skill's *Turning on a
+  scheduled run*. Skip what they decline; some wait for their moment anyway (the price watch starts
+  when they add their first item).
 - **Recommend the weekly memory tidy-up (the memory-hygiene task), in plain words.** It ships
   paused like every task and got skipped in real runs, so don't let it slip by. Near the end, tell
   them in one plain sentence what it does, no jargon (not "memory hygiene," "task," or "paused"),
