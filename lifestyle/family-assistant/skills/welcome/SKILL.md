@@ -24,9 +24,11 @@ first question.
   "Follow the `family-assistant` skill's `<capability>` reference and post to the family's group
   chat." Skip what they decline; some runs wait for their moment anyway (the price watch, for
   instance, starts when they add their first item).
-- **Offer what onboarding doesn't cover.** Check the shipped paused tasks; for any the
-  onboarding questions don't reach, raise it yourself: a plain, concise explanation of what it
-  does and why it helps, your recommendation, and activate it only when they say yes.
+- **Recommend the weekly memory tidy-up (the memory-hygiene task), in plain words.** It ships
+  paused like every task and got skipped in real runs, so don't let it slip by. Near the end, tell
+  them in one plain sentence what it does, no jargon (not "memory hygiene," "task," or "paused"),
+  something like: "Once a week I tidy up my memory, what I've learned about the family, upcoming
+  events, the things I'm meant to keep an eye on, so it all stays accurate." recommend keeping it on, and turn it on if they say yes.
 
 ## Tone
 
