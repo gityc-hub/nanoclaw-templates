@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Selected books",
+  "description": "Returned by the Librarian to the coordinator for one expert assignment. It selects exact book editions or reports that too few familiar books qualified; it does not supply book contents or private familiarity evidence.",
+  "type": "object",
+  "required": ["expert_role", "architecture_problem"],
+  "oneOf": [
+    {
+      "required": ["books", "selection_rationale"],
+      "not": { "required": ["failure"] }
+    },
+    {
+      "required": ["failure"],
+      "not": {
+        "anyOf": [
+          { "required": ["books"] },
+          { "required": ["selection_rationale"] }
+        ]
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "expert_role": { "type": "string", "minLength": 1 },
+    "architecture_problem": { "type": "string", "minLength": 1 },
+    "failure": { "const": "insufficient_familiar_books", "description": "Generic coordinator-only failure. It reveals no private familiarity evidence and is never forwarded to the expert." },
+    "books": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "description": "Canonical books selected for both the expert's field and this specific architecture problem.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "author", "edition", "expertise_fit", "problem_fit"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^b[1-9][0-9]*$", "description": "Temporary in the Librarian response. The coordinator replaces all ids with sequential b1 through bN before forwarding a rebuilt record to the expert." },
+          "title": { "type": "string", "minLength": 1, "description": "Exact published title." },
+          "author": { "type": "string", "minLength": 1, "description": "Author name(s) as published." },
+          "edition": { "type": "string", "minLength": 1, "description": "Exact published edition selected for this assignment; vague values such as latest are invalid." },
+          "expertise_fit": { "type": "string", "minLength": 1, "description": "High-level subject fit only. Do not expose a named or paraphrased book-specific idea from the private gate." },
+          "problem_fit": { "type": "string", "minLength": 1, "description": "High-level problem-category fit only. Do not expose a named or paraphrased book-specific idea from the private gate." }
+        }
+      }
+    },
+    "selection_rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "High-level reason this set covers the expert lens and problem better than one book alone, without exposing book-specific recalled material."
+    }
+  }
+}

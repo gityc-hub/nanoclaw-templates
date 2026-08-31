@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tech lead current brief",
+  "description": "Returned by the mandatory tech lead in both architecture-planning and architecture-review. It uses source-backed current web research instead of Librarian-selected books.",
+  "type": "object",
+  "required": ["role", "source_notes", "observations", "recommendations", "assumptions"],
+  "additionalProperties": false,
+  "properties": {
+    "role": { "const": "tech-lead" },
+    "source_notes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Current technical sources selected by query relevance, not by a fixed site list.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "url", "why_relevant", "used_for"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^s[1-9][0-9]*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "minLength": 1 },
+          "published_or_observed": {
+            "type": "string",
+            "description": "Date, version, commit, or 'not stated' when the source does not expose one."
+          },
+          "why_relevant": { "type": "string", "minLength": 1 },
+          "used_for": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "description": "Source-backed current field context that affects the planning or review judgment.",
+      "items": {
+        "type": "object",
+        "required": ["claim", "source_ids", "architecture_evidence", "applied_to"],
+        "additionalProperties": false,
+        "properties": {
+          "claim": { "type": "string", "minLength": 1 },
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "pattern": "^s[1-9][0-9]*$" }
+          },
+          "architecture_evidence": {
+            "type": "string",
+            "description": "The concrete code, design, constraint, or artifact examined through this current context."
+          },
+          "applied_to": {
+            "type": "string",
+            "description": "The exact option, finding, upheld practice, or recommendation shaped by this observation."
+          }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action", "tradeoff", "source_ids"],
+        "additionalProperties": false,
+        "properties": {
+          "action": { "type": "string" },
+          "tradeoff": { "type": "string" },
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "pattern": "^s[1-9][0-9]*$" }
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Missing facts, unavailable sources, or web-search limitations that could change the brief."
+    }
+  }
+}
