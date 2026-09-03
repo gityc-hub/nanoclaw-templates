@@ -68,8 +68,10 @@ minimal panel and produces the intended shape of report.
 
 ## Harnesses
 
-The root `plugin.json` follows the Agent Plugins standard. Any conforming
-harness loads the same skills tree and the `references/` library beside it.
+The root `plugin.json` follows the Agent Plugins standard. NanoClaw stamps the
+whole plugin into the agent workspace, so the skills and the shared
+`references/` library ship together. A harness that loads the plugin in place
+finds `references/` beside `skills/`.
 
 ## Stamp an agent
 

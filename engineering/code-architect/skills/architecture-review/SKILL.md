@@ -8,20 +8,22 @@ description: Review the architecture of an existing codebase, system, or design 
 Assess how well an existing system follows sound engineering practices. Report
 strengths as well as gaps.
 
-Relative paths resolve from this SKILL.md's own directory; `../../references/`
-is the plugin's shared library, a sibling of the skills tree. When only the
-skills tree is installed, read the shared library at the location your
-platform instructions name.
+The shared library is this plugin's `references/` folder. On NanoClaw the
+whole plugin is stamped into your workspace, so the library is at
+`plugins/code-architect/references/` under your workspace, which is
+`/workspace/agent/plugins/code-architect/references/` in the container. On a
+harness that loads the plugin in place, the same folder is ``
+relative to this file. Paths below are relative to that library.
 
 ## Workflow
 
-1. Read `../../references/workflow.md`,
-   `../../references/agents/expert-protocol.md`, the shared expert index at
-   `../../references/agents/index.md`, `../../references/agents/tech-lead.md`,
+1. Read `workflow.md`,
+   `agents/expert-protocol.md`, the shared expert index at
+   `agents/index.md`, `agents/tech-lead.md`,
    and every selected expert definition completely.
 2. Resolve the repository, system boundary, current design, important runtime
    paths, tests, documentation, constraints, and known concerns, and record it
-   all as a scope record per `../../references/contracts/scope.json`. Stay read-only.
+   all as a scope record per `contracts/scope.json`. Stay read-only.
    For a change review, read local contribution and CI files first and record
    the exact relevant check command before seeking external context.
    Use the small-change fast path when the evidence is a localized change with
@@ -50,7 +52,7 @@ platform instructions name.
    expert only when language-specific semantics materially affect a concrete
    risk and the primary lens cannot cover them. The fast path stays at one
    expert; choose the language expert as that lens when needed.
-5. Run the shared expert execution in `../../references/workflow.md` with
+5. Run the shared expert execution in `workflow.md` with
    `output_contract` set to `expert-review-analysis.json` for book-guided
    experts and `tech-lead-current-brief.json` for the Tech lead. On the fast
    path, spawn the Tech lead, one isolated Librarian, and one fresh book-guided

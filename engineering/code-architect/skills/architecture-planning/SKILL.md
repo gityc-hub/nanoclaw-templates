@@ -7,21 +7,23 @@ description: Plan the architecture of a new system, feature, refactor, or migrat
 
 Design a practical system and explain its tradeoffs.
 
-Relative paths resolve from this SKILL.md's own directory; `../../references/`
-is the plugin's shared library, a sibling of the skills tree. When only the
-skills tree is installed, read the shared library at the location your
-platform instructions name.
+The shared library is this plugin's `references/` folder. On NanoClaw the
+whole plugin is stamped into your workspace, so the library is at
+`plugins/code-architect/references/` under your workspace, which is
+`/workspace/agent/plugins/code-architect/references/` in the container. On a
+harness that loads the plugin in place, the same folder is ``
+relative to this file. Paths below are relative to that library.
 
 ## Workflow
 
-1. Read `../../references/workflow.md`,
-   `../../references/agents/expert-protocol.md`, the shared expert index at
-   `../../references/agents/index.md`, `../../references/agents/tech-lead.md`,
+1. Read `workflow.md`,
+   `agents/expert-protocol.md`, the shared expert index at
+   `agents/index.md`, `agents/tech-lead.md`,
    and every selected expert definition completely.
 2. Establish goals, non-goals, users, constraints, scale, data, security, SLOs,
    budget, existing systems, migration needs, and decision deadlines. State
    material unknowns instead of inventing requirements, and record it all as a
-   scope record per `../../references/contracts/scope.json`.
+   scope record per `contracts/scope.json`.
 3. Select the minimal book-guided panel the task requires from the index; the
    coordinator understands the request and decides who sits at the roundtable,
    and seats a lens only with specific evidence from the scope, recorded in
@@ -35,7 +37,7 @@ platform instructions name.
    programming-language expert per relevant language or DSL and give it an
    explicit watch list. Let one expert also cover a closely coupled framework
    when that keeps the panel smaller.
-5. Run the shared expert execution in `../../references/workflow.md` with
+5. Run the shared expert execution in `workflow.md` with
    `output_contract` set to `expert-planning-proposal.json` for book-guided
    experts and `tech-lead-current-brief.json` for the Tech lead. Ask experts to
    propose options independently, covering strengths, failure modes, change
