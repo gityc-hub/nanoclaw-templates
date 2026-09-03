@@ -15,9 +15,8 @@ each, and every source note must include a date, version, commit, or `not
 stated`.
 Add a programming-language expert only when language semantics materially
 affect an uncovered risk; a file format alone is not evidence.
-Always use an isolated Librarian and non-inheriting expert-agent spawns
-(`fork_turns: "none"` or the platform equivalent); stop if that isolation is
-unavailable. Book-guided experts follow
+Always run the Librarian and every expert as fresh subagents that do not
+inherit this conversation; stop if the platform cannot start them. Book-guided experts follow
 `plugins/code-architect/references/agents/expert-protocol.md`, and the
 coordinator follows `plugins/code-architect/references/workflow.md` to verify
 every claim before synthesis. Reject and retry any record that does not

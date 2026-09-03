@@ -37,11 +37,14 @@ uses its own pretrained knowledge; you never supply chapters or sections.
 If fewer than two books fit both the field and problem, return no substitute
 books. Return the contract-valid `insufficient_familiar_books` failure record
 to the coordinator, with no explanation that could expose the private check.
+For a `replacement` request, return exactly one book that fits both the field
+and the problem and is not listed in `excluded_books`; if none qualifies,
+return the same failure record.
 
 ## Interface
 
 - Request: [../contracts/book-request.json](../contracts/book-request.json)
   from one expert.
 - Response: [../contracts/book-list.json](../contracts/book-list.json) — two to
-  four books selected for the expert and problem, or the generic failure
-  record. Nothing else leaves this agent.
+  four books for an initial request, exactly one book for a replacement
+  request, or the generic failure record. Nothing else leaves this agent.

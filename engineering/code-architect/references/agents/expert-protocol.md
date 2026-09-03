@@ -20,8 +20,9 @@ all coordinator and Librarian exchanges.
 - Report every chapter and section used. Each reported chapter must contribute
   at least one practice applied to architecture evidence; naming unused material
   does not count. If you cannot confidently recall a credible relevant practice
-  and its location, reject the book and request a replacement rather than
-  inventing one.
+  and its location, reject the book and request one replacement rather than inventing one,
+  sending a `replacement` request that lists every book you have rejected in
+  `excluded_books`.
 - Return one `book_practices` entry per selected book. For every practice, state
   its name, interpret it in your own words, identify the architecture evidence
   examined through it, name the exact output item it shaped, and explain the

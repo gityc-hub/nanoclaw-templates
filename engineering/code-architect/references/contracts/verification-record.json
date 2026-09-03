@@ -62,7 +62,7 @@
       "description": "One independent check per Tech lead source used in the report.",
       "items": {
         "type": "object",
-        "required": ["expert_role", "source_id", "title", "url", "used_for", "verdict", "method"],
+        "required": ["expert_role", "source_id", "title", "url", "published_or_observed", "used_for", "verdict", "method"],
         "additionalProperties": false,
         "properties": {
           "expert_role": { "const": "tech-lead" },
@@ -71,6 +71,7 @@
           "url": { "type": "string" },
           "published_or_observed": {
             "type": "string",
+            "minLength": 1,
             "description": "Date, version, commit, or 'not stated' when the source does not expose one."
           },
           "used_for": { "type": "string" },

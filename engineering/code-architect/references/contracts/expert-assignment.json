@@ -3,8 +3,11 @@
   "title": "Expert assignment",
   "description": "Sent by the coordinator to each selected expert. The expert answers with JSON against the contract named in output_contract.",
   "type": "object",
-  "required": ["role", "task_type", "question", "scope", "watch_list", "output_contract", "justification"],
+  "required": ["role", "task_type", "question", "scope", "watch_list", "output_contract"],
   "additionalProperties": false,
+  "if": { "properties": { "role": { "const": "tech-lead" } } },
+  "then": { "not": { "required": ["justification"] } },
+  "else": { "required": ["justification"] },
   "properties": {
     "role": {
       "type": "string",
@@ -37,7 +40,7 @@
     },
     "justification": {
       "type": "string",
-      "description": "The specific evidence in the scope that made this lens necessary. A lens without evidence is not seated."
+      "description": "Required for every book-guided expert: the specific evidence in the scope that made this lens necessary. A lens without evidence is not seated. Omit it for the Tech lead, which is a standing seat."
     }
   }
 }

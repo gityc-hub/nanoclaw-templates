@@ -3,7 +3,7 @@
   "title": "Selected books",
   "description": "Returned by the Librarian to the coordinator for one expert assignment. It selects exact book editions or reports that too few familiar books qualified; it does not supply book contents or private familiarity evidence.",
   "type": "object",
-  "required": ["expert_role", "architecture_problem"],
+  "required": ["role", "architecture_problem", "request_kind"],
   "oneOf": [
     {
       "required": ["books", "selection_rationale"],
@@ -20,16 +20,18 @@
     }
   ],
   "additionalProperties": false,
+  "if": { "properties": { "request_kind": { "const": "replacement" } } },
+  "then": { "properties": { "books": { "minItems": 1, "maxItems": 1 } } },
+  "else": { "properties": { "books": { "minItems": 2, "maxItems": 4 } } },
   "properties": {
-    "expert_role": { "type": "string", "minLength": 1 },
+    "role": { "type": "string", "minLength": 1, "description": "Echo of the request's role." },
+    "request_kind": { "enum": ["initial", "replacement"], "description": "Echo of the request's request_kind." },
     "architecture_problem": { "type": "string", "minLength": 1 },
     "failure": { "const": "insufficient_familiar_books", "description": "Generic coordinator-only failure. It reveals no private familiarity evidence and is never forwarded to the expert." },
     "books": {
       "type": "array",
-      "minItems": 2,
-      "maxItems": 4,
       "uniqueItems": true,
-      "description": "Canonical books selected for both the expert's field and this specific architecture problem.",
+      "description": "Canonical books selected for both the expert's field and this specific architecture problem: two to four for an initial request, exactly one for a replacement request.",
       "items": {
         "type": "object",
         "required": ["id", "title", "author", "edition", "expertise_fit", "problem_fit"],
@@ -47,7 +49,7 @@
     "selection_rationale": {
       "type": "string",
       "minLength": 1,
-      "description": "High-level reason this set covers the expert lens and problem better than one book alone, without exposing book-specific recalled material."
+      "description": "High-level reason this set covers the expert lens and problem better than one book alone, without exposing book-specific recalled material. For a replacement request, why the one book fits the expert lens and problem, at the same high level."
     }
   }
 }

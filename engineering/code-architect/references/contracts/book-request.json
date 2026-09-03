@@ -3,9 +3,15 @@
   "title": "Book request",
   "description": "Sent by a selected book-guided expert to the Librarian before analysis.",
   "type": "object",
-  "required": ["role", "expertise", "question", "architecture_problem", "technologies", "watch_list"],
+  "required": ["request_kind", "role", "expertise", "question", "architecture_problem", "technologies", "watch_list"],
   "additionalProperties": false,
+  "if": { "properties": { "request_kind": { "const": "replacement" } } },
+  "then": { "required": ["excluded_books"] },
   "properties": {
+    "request_kind": {
+      "enum": ["initial", "replacement"],
+      "description": "initial: the first request for this assignment. replacement: the expert rejected a book and asks for exactly one more."
+    },
     "role": {
       "type": "string",
       "description": "The expert's lens, e.g. 'systems' or 'language:typescript'."
@@ -38,6 +44,21 @@
       "type": "array",
       "items": { "type": "string" },
       "description": "Files, components, or artifacts in scope for this expert."
+    },
+    "excluded_books": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Every book this expert has rejected for this assignment, by exact identity. The Librarian must not return any of them. Required for a replacement request.",
+      "items": {
+        "type": "object",
+        "required": ["title", "author", "edition"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "author": { "type": "string", "minLength": 1 },
+          "edition": { "type": "string", "minLength": 1 }
+        }
+      }
     }
   }
 }

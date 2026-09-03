@@ -31,10 +31,15 @@ Each rule stands on its own line.
 
 ### 1. Start every expert in isolation
 
-- Start each expert with a non-inheriting spawn (`fork_turns: "none"` or the
-  platform equivalent) and provide only the inputs named in these steps.
-- If the platform cannot guarantee that isolation, stop. Do not simulate an
-  expert or fork one from coordinator or Librarian history.
+- Start each expert as a fresh subagent whose context does not inherit this
+  conversation, never as a fork of it, and provide only the inputs named in
+  these steps.
+- If the platform cannot start fresh subagents, stop. Do not simulate an
+  expert or fork one from coordinator or Librarian history. Once the panel runs
+  this way, record `execution_mode` as `agents` in the scope record.
+- Isolation here means conversation isolation. Experts can read the plugin's
+  own files, so the protection is that no coordinator or Librarian history is
+  ever placed in an expert's prompt.
 - Give every expert the same scope and evidence in an assignment whose
   `output_contract` the skill selects.
 - The mandatory [Tech lead](agents/tech-lead.md) receives
@@ -81,6 +86,9 @@ sits between every expert and the Librarian.
   ideas, or training-data claims. Treat the gate as a familiarity filter,
   not proof of training-set membership, because models cannot inspect their
   training corpus.
+- A replacement request, sent when an expert rejects a book, carries
+  `request_kind: replacement` and every rejected book in `excluded_books`. The
+  Librarian returns exactly one book and never one listed there.
 
 The book-list response goes only to the coordinator. Validate every list
 before use:
@@ -93,15 +101,20 @@ before use:
 - Reject and retry any fit or rationale that exposes confidence, familiarity
   checks, recalled material, training-data claims, or named or paraphrased
   book-specific content.
-- Require `expert_role` and `architecture_problem` to exactly equal the
-  original book request. Reject the record if either differs, so those fields
+- Require `role`, `architecture_problem`, and `request_kind` to exactly equal
+  the original book request. Reject the record if any differs, so those fields
   cannot carry hidden Librarian content.
 - Never forward the raw Librarian record. Rebuild a clean book-list record
-  from the original request fields, the verified identity, and sanitized
-  high-level fit fields.
+  from the original request fields, the verified identity, and the validated
+  `expertise_fit`, `problem_fit`, and `selection_rationale` fields.
 - Sort books by exact title, then author, then edition, and assign sequential
   ids `b1` through `bN` in the coordinator, so Librarian-supplied order and
   ids cannot become covert channels.
+- For a replacement, merge the one returned book into the expert's accepted
+  books, then rebuild, sort, and re-id the full list before forwarding it. If
+  the Librarian returns `insufficient_familiar_books` for a replacement and the
+  expert would keep fewer than two books, revise the assignment or stop and
+  ask the user.
 
 ### 4. Hand the validated list to the expert
 
@@ -122,7 +135,8 @@ Continue each book-guided expert in the isolated context started in step 1.
 - Every reported chapter must name at least one section and contribute at
   least one practice applied to concrete architecture evidence.
 - If the expert cannot confidently recall a relevant practice and its
-  location, it rejects that book and requests one replacement.
+  location, it rejects that book and requests one replacement, naming every
+  book it has rejected so far in `excluded_books`.
 
 ### 6. Collect and validate every response
 

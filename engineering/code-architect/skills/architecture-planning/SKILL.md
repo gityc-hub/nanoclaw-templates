@@ -33,10 +33,12 @@ relative to this file. Paths below are relative to that library.
    Cloud, AI, or ML only when the planned system materially uses that domain.
 4. Identify materially involved languages or DSLs from the planned runtime,
    libraries, interfaces, data, infrastructure, and existing system. Record each
-   language's evidence and seating decision in the scope record. Spawn one
-   programming-language expert per relevant language or DSL and give it an
-   explicit watch list. Let one expert also cover a closely coupled framework
-   when that keeps the panel smaller.
+   language's evidence and seating decision in the scope record. Add a
+   programming-language expert only when language semantics materially affect
+   a risk the seated experts do not cover; a runtime or file format appearing
+   in the plan is not enough evidence. Give each seated language expert an
+   explicit watch list, and let one expert also cover a closely coupled
+   framework when that keeps the panel smaller.
 5. Run the shared expert execution in `workflow.md` with
    `output_contract` set to `expert-planning-proposal.json` for book-guided
    experts and `tech-lead-current-brief.json` for the Tech lead. Ask experts to
