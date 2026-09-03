@@ -47,7 +47,7 @@
       "expected_output": "The request takes the full architecture-review path because the provider boundary is a shared, cross-provider contract. Each book-guided expert receives two to four editions selected for both its field and the provider-boundary problem, uses pretrained knowledge, and applies verified chapter and section practices while assessing contract completeness, substitutability, composition gates, and evolution risks. The standing Tech lead adds verified current-source context.",
       "files": [],
       "expectations": [
-        "The task is handled as an architecture review, not a PR review or small-change fast path.",
+        "The task is handled as an architecture review, not a PR review.",
         "The Librarian selects at least two books for every book-guided expert based on both field expertise and the provider-boundary problem.",
         "The Librarian returns books and selection reasons, with no copies, source locators, section names, principles, summaries, or excerpts.",
         "The selected set covers more than one concern, such as dependency boundaries and executable architecture conformance.",

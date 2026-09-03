@@ -12,8 +12,7 @@ query-driven web research, never a fixed source list, and never asks the
 Librarian for books. The Tech lead returns source-backed insights, technology
 signals, and tradeoffs, not recommendations. It must include at least one of
 each, and every source note must include a date, version, commit, or `not
-stated`. For a localized low-risk architecture review, start only one fresh
-book-guided expert agent with two selected books plus the standing Tech lead.
+stated`.
 Add a programming-language expert only when language semantics materially
 affect an uncovered risk; a file format alone is not evidence.
 Always use an isolated Librarian and non-inheriting expert-agent spawns

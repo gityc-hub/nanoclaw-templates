@@ -26,42 +26,23 @@ relative to this file. Paths below are relative to that library.
    all as a scope record per `contracts/scope.json`. Stay read-only.
    For a change review, read local contribution and CI files first and record
    the exact relevant check command before seeking external context.
-   Use the small-change fast path when the evidence is a localized change with
-   one main concern and no security boundary, data migration, public-contract,
-   reliability-critical, or cross-system effect, unless the user explicitly
-   asks for a panel. Scope and risk decide this, not line count.
-   Complete this routing decision before spawning any agent. Once the fast path
-   is selected, do not start and later cancel a child; escalate only when
-   verified evidence broadens the risk.
 3. Select the minimal book-guided panel the task requires from the index; the
    coordinator understands the request and decides who sits at the roundtable,
    and seats a lens only with specific evidence from the scope, recorded in
    that expert's assignment `justification`. Always add the Tech lead as the
    standing current-source role; it supplies source-backed insights,
    technology signals, and tradeoffs, not recommendations. Add a specialist
-   only when the system contains evidence for that domain. On the fast path,
-   select one primary lens plus the
-   standing Tech lead and start only those experts with non-inheriting spawns
-   (`fork_turns: "none"` or the platform equivalent). Record `execution_mode`
-   as `agents`. The primary lens may be the programming-language expert.
+   only when the system contains evidence for that domain.
 4. Identify materially involved languages or DSLs from implementation,
    imports, manifests, build files, schemas, configuration, and documentation,
    judging by content rather than file suffixes alone. Record each language's
    evidence and seating decision in the scope record. A language or file format
    does not earn a seat merely because it appears. Add a programming-language
    expert only when language-specific semantics materially affect a concrete
-   risk and the primary lens cannot cover them. The fast path stays at one
-   expert; choose the language expert as that lens when needed.
+   risk and the primary lens cannot cover them.
 5. Run the shared expert execution in `workflow.md` with
    `output_contract` set to `expert-review-analysis.json` for book-guided
-   experts and `tech-lead-current-brief.json` for the Tech lead. On the fast
-   path, spawn the Tech lead, one isolated Librarian, and one fresh book-guided
-   expert agent; select exactly two books for that book-guided expert, and
-   record `execution_mode` as `agents`. Use pretrained book knowledge exactly
-   as the shared workflow requires; the fast path does not waive context
-   isolation or practice-trace rules. If
-   non-inheriting agent contexts are unavailable, stop instead of simulating
-   these roles. Experts inspect
+   experts and `tech-lead-current-brief.json` for the Tech lead. Experts inspect
    relevant tests, work read-only, and report only to the coordinator.
 6. Verify claims against the code and evidence. When the scope record names
    a test command and the environment allows it, run it and cite the output.
@@ -84,17 +65,13 @@ relative to this file. Paths below are relative to that library.
    harnesses during an architecture review unless the user separately asks.
    For missing operational evidence, record the smallest delegated proof spec.
 7. Stop after one full review cycle (verification reads included) unless the
-   user asks for another. If fast-path evidence reveals a cross-cutting or
-   high-risk concern, leave the fast path and run the full panel once; do not
-   start with a larger panel just in case.
+   user asks for another.
 
 ## Output
 
 - Panel: the seated experts and one line on why each was included; lenses
   excluded at selection and experts dropped at synthesis, each with its
-  reason. For the small-change fast path, name only the one applied lens and
-  the standing Tech lead, plus the reason no wider panel was needed. Attribute
-  each finding below to its lens.
+  reason. Attribute each finding below to its lens.
 - If the user requested specific questions, headings, score names, or ordering,
   preserve that shape and answer each requested item directly.
 - Executive assessment: aligned, mixed, or at risk, with the main reason.
