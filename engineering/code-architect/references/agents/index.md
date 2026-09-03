@@ -28,7 +28,7 @@ risk that the seated experts do not cover.
 - [Testing](testing-expert.md): test strategy, behavior coverage, determinism,
   eval and regression gates.
 - [Algorithmic](algorithmic-expert.md): algorithms, performance, numerical work.
-- [Change Management](change-management-expert.md): refactors, migrations,
+- [Change management](change-management-expert.md): refactors, migrations,
   rollout, rollback.
 - [Security](security-expert.md): adversaries, trust boundaries, abuse,
   defensive controls.
@@ -50,7 +50,7 @@ validation, and verification.
 
 Selection hints:
 
-- Planning usually needs Systems or Pragmatic plus Change Management. Add a
+- Planning usually needs Systems or Pragmatic plus Change management. Add a
   domain specialist only when the planned system uses that domain.
 - Architecture review usually needs Systems plus the lens closest to the stated
   concern.

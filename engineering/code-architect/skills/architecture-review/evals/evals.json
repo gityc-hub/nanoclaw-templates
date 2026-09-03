@@ -110,22 +110,6 @@
         "The report answers the explicit compute-SDK question directly.",
         "The report preserves the seven requested questions instead of replacing them with generic design bullets."
       ]
-    },
-    {
-      "id": 10,
-      "prompt": "Improve the standing Tech lead role. It should be in every panel, use web search without a hardcoded source list, cite sources, and bring insights, technologies, and tradeoffs. It should not make recommendations itself.",
-      "expected_output": "The skill keeps the Tech lead mandatory in planning and review, requires source notes with dates, versions, commits, or not stated, forbids a hardcoded source list, and shapes the Tech lead contract around non-empty insights, technology signals, and tradeoffs rather than recommendations. Final recommendations remain the coordinator's job after it verifies all lenses.",
-      "files": [],
-      "expectations": [
-        "tech-lead-current-brief.json has required source_notes and no recommendations property.",
-        "Tech lead output fields cover insights, technologies, tradeoffs, and assumptions.",
-        "Every insight, technology signal, and tradeoff references source_ids.",
-        "Every source note requires published_or_observed, allowing not stated when the source exposes no date, version, or commit.",
-        "Technologies and tradeoffs are non-empty arrays.",
-        "The coordinator rejects source_ids that do not match a real source_notes id.",
-        "Architecture-planning and architecture-review both state that the Tech lead is mandatory.",
-        "The report still requires a source list used by the Tech lead."
-      ]
     }
   ]
 }

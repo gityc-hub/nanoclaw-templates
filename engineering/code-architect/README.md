@@ -5,7 +5,7 @@ A NanoClaw template for two expert-panel workflows:
 - Architecture Planning for systems, features, refactors, and technology choices.
 - Architecture Review for existing systems and codebases.
 
-![NanoClaw architects in a library](nanoclaw-architects-library.jpg)
+![NanoClaw architects in a library](../../assets/nanoclaw-architects-library.jpg)
 
 ## Expert selection
 

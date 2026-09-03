@@ -1,4 +1,4 @@
-# Roundtable workflow
+# Code Architect workflow
 
 Both skills run the same flow; only scope, expert analysis, final verification,
 and report format differ. Every agent returns structured JSON against a
@@ -15,7 +15,8 @@ flowchart TD
     PS --> TL[Always add Tech lead for<br/>current source-backed context]
     TL --> TR[Tech lead does query-driven web research;<br/>no fixed source list, no books]
     PS --> LE[Add a language expert only when semantics<br/>materially affect an uncovered risk]
-    LE --> LB[Select 2–4 books for each book-guided<br/>expert's field and problem]
+    PS --> LB[Select 2–4 books for each book-guided<br/>expert's field and problem]
+    LE --> LB
     LB --> BK[Expert uses pretrained knowledge to choose<br/>relevant chapters, sections, and practices]
     BK --> EA[Expert applies every reported practice<br/>to architecture evidence]
     TR --> V[Coordinator verifies claims, books,<br/>sources, and application]
@@ -204,7 +205,7 @@ never substitutes its own book practices or applications.
 |----------|----------|----------|---------|
 | [contracts/scope.json](contracts/scope.json) | coordinator | coordinator (audit record) | both skills |
 | [contracts/expert-assignment.json](contracts/expert-assignment.json) | coordinator | each expert | both skills |
-| [contracts/book-request.json](contracts/book-request.json) | each book-guided expert | Librarian | both skills |
+| [contracts/book-request.json](contracts/book-request.json) | each book-guided expert | Librarian, relayed by the coordinator | both skills |
 | [contracts/book-list.json](contracts/book-list.json) | Librarian | coordinator; requesting expert only after identity validation | both skills |
 | [contracts/tech-lead-current-brief.json](contracts/tech-lead-current-brief.json) | Tech lead | coordinator | both skills |
 | [contracts/expert-planning-proposal.json](contracts/expert-planning-proposal.json) | each book-guided expert | coordinator | architecture-planning |
