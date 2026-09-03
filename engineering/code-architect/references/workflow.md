@@ -26,110 +26,159 @@ flowchart TD
 
 ## Shared expert execution
 
-After scope and panel selection, both skills run these stages:
+After scope and panel selection, both skills run these seven steps in order.
+Each rule stands on its own line.
 
-1. Start every expert independently with a non-inheriting spawn
-   (`fork_turns: "none"` or the platform equivalent), then provide only the
-   inputs named below. If the platform cannot guarantee that isolation, stop
-   instead of simulating or forking an expert from coordinator or Librarian
-   history. Give every expert the same scope and evidence in an assignment
-   whose `output_contract` is selected by the skill. The mandatory
-   [Tech lead](agents/tech-lead.md) receives `tech-lead-current-brief.json`;
-   every book-guided expert receives the invoking skill's expert contract and
-   follows the [shared expert protocol](agents/expert-protocol.md).
-2. Continue the Tech lead in its isolated context. It uses available web-search
-   tools to find current technical sources by query relevance, authority,
-   recency, and depth. Do not hardcode or require a fixed source list; examples
-   such as official engineering blogs, standards, preprints, issue trackers,
-   public technical discussions, Hacker News, and X threads are source shapes,
-   not an allowlist. The Tech lead does not request books, use the Librarian,
-   cite unsupported current claims, or write recommendations. It returns
-   source-backed insights, technology signals, and tradeoffs; the coordinator
-   owns final recommendations. It must return at least one source note, one
-   insight, one technology signal, and one tradeoff. Every source note must
-   include a date, version, commit, or `not stated`. If web search is
-   unavailable or no relevant source can be found, the coordinator treats the
-   Tech lead step as blocked instead of accepting a source-free brief.
-3. Start one isolated shared [Librarian](agents/librarian.md). Each book-guided
-   expert sends its book request to the coordinator, which relays it to the
-   Librarian and receives the response. Never allow direct expert-Librarian
-   messaging. Each request is matched to both the expert's expertise and the
-   concrete architecture problem. The Librarian returns two to four exact
-   editions and fit reasons, but no verification sources, section names,
-   summaries, principles, excerpts, or analysis. Validate each book list before
-   use.
-   The Librarian privately accepts a book only when it recognizes the exact
-   title-author-edition tuple from pretrained knowledge and can recall at least
-   three distinctive book-specific ideas. It rejects uncertainty without
-   exposing the check, confidence, recalled ideas, or training-data claims to
-   the expert. Treat this as a familiarity filter, not proof of exact
-   training-set membership, because models cannot inspect their training
-   corpus. The book-list response goes only to the coordinator. If it contains
-   `insufficient_familiar_books`, do not forward it to the expert; revise the
-   assignment or stop and ask the user. For a selected list, reject blank,
-   vague, or duplicate metadata and independently confirm each exact
-   title-author-edition tuple against official author or publisher material
-   before forwarding the list to the expert. Also reject and retry any fit or
-   rationale that exposes confidence, familiarity checks, recalled material,
-   training-data claims, or named or paraphrased book-specific content. Require
-   `expert_role` and `architecture_problem` to exactly equal the original book
-   request; reject the record if either differs, so those fields cannot carry
-   hidden Librarian content. Never forward the raw Librarian record. Rebuild a
-   clean book-list record from the original request fields, verified identity,
-   and sanitized high-level fit fields. Sort books by exact title, author, then
-   edition and assign sequential ids `b1` through `bN` in the coordinator so
-   Librarian-supplied order and ids cannot become covert channels.
-4. Continue each book-guided expert in the same isolated context started in
-   step 1. That context may contain only its expert definition, protocol,
-   assignment, and coordinator-validated book list. Exclude coordinator history,
-   Librarian instructions, raw or unvalidated Librarian responses, the private
-   familiarity gate, and other experts' contexts. Explicitly instruct the expert
-   to use its pretrained knowledge of the selected books. Do not search for,
-   download, or require book copies.
-5. Each book-guided expert chooses relevant chapters and sections based on its
-   field and the concrete architecture problem. Every reported chapter must
-   name at least one section and contribute at least one practice applied to
-   concrete architecture evidence. If the expert cannot confidently recall a
-   relevant practice and its location, it rejects that book and requests one
-   replacement.
-6. Have every expert complete its JSON before synthesis. Validate every response
-   against the assignment's output contract. Reject source claims, chapter
-   names, sections, practices, or applications that are vague, internally
-   inconsistent, or unsupported. For Tech lead briefs, also reject any
-   `source_ids` value that does not match a real `source_notes[].id`.
-7. Verify claims in a
-   [verification record](contracts/verification-record.json). For every book,
-   independently find official author or publisher material and confirm its
-   exact title, author, and edition. Verify the chapter structure and each
-   chapter-practice association using official author or publisher material
-   when available, otherwise reliable public bibliographic or preview material.
-   This verification never limits selection to free books and does not require
-   a complete copy. Verify that every stated application follows from the
-   architecture evidence. The coordinator may confirm or reject an entry but
-   never rewrite it or invent an application. Retry an unverifiable entry once,
-   then remove its authority and record why. Describe the result as verified
-   book-grounded use of pretrained knowledge, not runtime reading or proof of
-   training-set membership. For every Tech lead source used in the report,
-   verify the URL, source date or version when exposed, relevance to the
-   architecture question, and how each insight, technology signal, or tradeoff
-   applies to the concrete evidence. For each major recommendation, option, or
-   evolution step, record a
-   production-proof assessment: `direction` for architecture/source support,
-   `provider` for target-provider support without a run, or `operational` only
-   when a real command, test, deploy, or drill proved it. Name the missing proof
-   and the next smallest delegated proof spec. Describe that proof as validation
-   work for the owning team: owner, acceptance evidence, observations to
-   capture, and pass/fail conditions. Do not turn proof specs into backlog work
-   such as building adapters, writing fixtures, adding tests, creating
-   manifests, running deployments, or implementing proof harnesses unless the
-   user separately asks for execution.
+### 1. Start every expert in isolation
+
+- Start each expert with a non-inheriting spawn (`fork_turns: "none"` or the
+  platform equivalent) and provide only the inputs named in these steps.
+- If the platform cannot guarantee that isolation, stop. Do not simulate an
+  expert or fork one from coordinator or Librarian history.
+- Give every expert the same scope and evidence in an assignment whose
+  `output_contract` the skill selects.
+- The mandatory [Tech lead](agents/tech-lead.md) receives
+  `tech-lead-current-brief.json`. Every book-guided expert receives the
+  invoking skill's expert contract and follows the
+  [shared expert protocol](agents/expert-protocol.md).
+
+### 2. Run the Tech lead
+
+Continue the Tech lead in its isolated context.
+
+- It uses available web-search tools to find current technical sources by
+  query relevance, authority, recency, and depth.
+- Do not hardcode or require a fixed source list. Official engineering blogs,
+  standards, preprints, issue trackers, public technical discussions, Hacker
+  News, and X threads are examples of source shapes, not an allowlist.
+- It does not request books, use the Librarian, cite unsupported current
+  claims, or write recommendations. It returns source-backed insights,
+  technology signals, and tradeoffs; the coordinator owns final
+  recommendations.
+- It must return at least one source note, one insight, one technology
+  signal, and one tradeoff.
+- Every source note must include a date, version, commit, or `not stated`.
+- If web search is unavailable or no relevant source can be found, treat the
+  Tech lead step as blocked. Never accept a source-free brief.
+
+### 3. Select books through the Librarian
+
+Start one isolated shared [Librarian](agents/librarian.md). The coordinator
+sits between every expert and the Librarian.
+
+- Each book-guided expert sends its book request to the coordinator. The
+  coordinator relays it to the Librarian and receives the response. Never
+  allow direct expert-Librarian messaging.
+- Each request is matched to both the expert's expertise and the concrete
+  architecture problem.
+- The Librarian returns two to four exact editions with fit reasons, and
+  nothing else: no verification sources, section names, summaries,
+  principles, excerpts, or analysis.
+- The Librarian accepts a book only through its private familiarity gate: it
+  recognizes the exact title, author, and edition from pretrained knowledge
+  and recalls at least three distinctive book-specific ideas. It rejects
+  uncertainty and never exposes the check, its confidence, the recalled
+  ideas, or training-data claims. Treat the gate as a familiarity filter,
+  not proof of training-set membership, because models cannot inspect their
+  training corpus.
+
+The book-list response goes only to the coordinator. Validate every list
+before use:
+
+- If the response is `insufficient_familiar_books`, do not forward it. Revise
+  the assignment or stop and ask the user.
+- Reject blank, vague, or duplicate metadata.
+- Independently confirm each exact title, author, and edition against
+  official author or publisher material before forwarding the list.
+- Reject and retry any fit or rationale that exposes confidence, familiarity
+  checks, recalled material, training-data claims, or named or paraphrased
+  book-specific content.
+- Require `expert_role` and `architecture_problem` to exactly equal the
+  original book request. Reject the record if either differs, so those fields
+  cannot carry hidden Librarian content.
+- Never forward the raw Librarian record. Rebuild a clean book-list record
+  from the original request fields, the verified identity, and sanitized
+  high-level fit fields.
+- Sort books by exact title, then author, then edition, and assign sequential
+  ids `b1` through `bN` in the coordinator, so Librarian-supplied order and
+  ids cannot become covert channels.
+
+### 4. Hand the validated list to the expert
+
+Continue each book-guided expert in the isolated context started in step 1.
+
+- That context may contain only the expert definition, the protocol, the
+  assignment, and the coordinator-validated book list.
+- Exclude coordinator history, Librarian instructions, raw or unvalidated
+  Librarian responses, the private familiarity gate, and other experts'
+  contexts.
+- Instruct the expert explicitly to use its pretrained knowledge of the
+  selected books. Do not search for, download, or require book copies.
+
+### 5. Experts choose chapters and apply practices
+
+- Each book-guided expert chooses relevant chapters and sections from its own
+  field and the concrete architecture problem.
+- Every reported chapter must name at least one section and contribute at
+  least one practice applied to concrete architecture evidence.
+- If the expert cannot confidently recall a relevant practice and its
+  location, it rejects that book and requests one replacement.
+
+### 6. Collect and validate every response
+
+- Have every expert complete its JSON before synthesis.
+- Validate every response against the assignment's output contract.
+- Reject source claims, chapter names, sections, practices, or applications
+  that are vague, internally inconsistent, or unsupported.
+- For Tech lead briefs, also reject any `source_ids` value that does not
+  match a real `source_notes[].id`.
+
+### 7. Verify and record
+
+Record every check in a
+[verification record](contracts/verification-record.json).
+
+Books:
+
+- For every book, independently find official author or publisher material
+  and confirm its exact title, author, and edition.
+- Verify the chapter structure and each chapter-practice association using
+  official author or publisher material when available, otherwise reliable
+  public bibliographic or preview material. This never limits selection to
+  free books and never requires a complete copy.
+- Verify that every stated application follows from the architecture
+  evidence.
+- Confirm or reject an entry; never rewrite it or invent an application.
+- Retry an unverifiable entry once, then remove its authority and record why.
+- Describe the result as verified book-grounded use of pretrained knowledge,
+  not runtime reading or proof of training-set membership.
+
+Tech lead sources:
+
+- For every source used in the report, verify the URL, the source date or
+  version when exposed, its relevance to the architecture question, and how
+  each insight, technology signal, or tradeoff applies to the concrete
+  evidence.
+
+Production proof:
+
+- For each major recommendation, option, or evolution step, record a
+  production-proof assessment: `direction` when architecture or sources
+  support it, `provider` when the target provider supports it without a run,
+  or `operational` only when a real command, test, deploy, or drill proved it.
+- Name the missing proof and the next smallest delegated proof spec.
+- Describe that proof as validation work for the owning team: owner,
+  acceptance evidence, observations to capture, and pass/fail conditions.
+- Do not turn proof specs into backlog work such as building adapters,
+  writing fixtures, adding tests, creating manifests, running deployments, or
+  implementing proof harnesses unless the user separately asks for execution.
 
 ## Contracts
 
 Each output is a JSON Schema in [contracts/](contracts/). The shared expert
 protocol declares expert contracts; the Librarian declares its own interface.
-Each agent sees only those contracts. The expert output contract is chosen by
-the invoking skill:
+Each agent sees only those contracts. The invoking skill chooses the expert
+output contract.
 
 Before using any book list, expert response, or verification record, the
 coordinator checks it against the named contract and returns invalid JSON to
@@ -163,16 +212,18 @@ assessment earns its confirmed entry.
 ## Report — coordinator to user
 
 The coordinator consumes the expert JSON, verifies it, and writes the
-user-facing report in the invoking skill's own `Output` section — markdown
-prose, with every finding and upheld practice attributed to the lens that
-produced it. Report each book's chapters and sections used, practices applied,
-source-backed Tech lead insights, technology signals, and tradeoffs used, and
-verification verdict. List the Tech lead `source_notes` first in the
-current-source trace so the report has an explicit source list. Expert JSON
-stays internal working data.
-If the user requests specific questions, headings, score names, or ordering,
-preserve that shape and answer each item directly; do not replace it with the
-template's generic headings.
-Separate architecture direction from production proof: include confidence,
-evidence, missing proof, and the next smallest delegated proof spec for each
-major recommendation.
+user-facing report in the invoking skill's own `Output` section as markdown
+prose. Expert JSON stays internal working data.
+
+- Attribute every finding and upheld practice to the lens that produced it.
+- Report each book's chapters and sections used, practices applied,
+  source-backed Tech lead insights, technology signals, and tradeoffs used,
+  and verification verdict.
+- List the Tech lead `source_notes` first in the current-source trace so the
+  report has an explicit source list.
+- If the user requests specific questions, headings, score names, or
+  ordering, preserve that shape and answer each item directly; do not replace
+  it with the template's generic headings.
+- Separate architecture direction from production proof: include confidence,
+  evidence, missing proof, and the next smallest delegated proof spec for
+  each major recommendation.
