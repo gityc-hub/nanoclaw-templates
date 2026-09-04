@@ -9,6 +9,14 @@
         "description": "Data analyst agent: pipeline checks, query writing, and recurring report integrity"
       }
     ],
+    "family": [
+      {
+        "ref": "family/story-keeper",
+        "name": "story-keeper",
+        "version": "1.0.0",
+        "description": "Memoir interviewer for a family: draws out a parent's or grandparent's stories one question at a time, keeps a sourced family memory, and drafts chapters on request"
+      }
+    ],
     "lifestyle": [
       {
         "ref": "lifestyle/family-assistant",

@@ -1,0 +1,123 @@
+# The family memory (`family-memory/`)
+
+One folder, plain Markdown, readable by a person and by any agent. Two kinds of agent write it:
+an interviewer (this template) writes what people *told* it; a records researcher (for example
+the `family/historian` template) writes what documents *show*. Both use the same files, so a
+family can run either or both on one memory.
+
+```
+family-memory/
+├── index.md              # entry point: one line per person, place, era, with links
+├── people/<slug>.md      # one person
+├── places/<slug>.md      # one place, with its name variants
+├── eras/<slug>.md        # one period of one person's life
+├── claims/<id>.md        # ONE fact each, with provenance and status
+└── open-questions.md     # what a human must answer or fetch
+```
+
+Slugs are lowercase, hyphenated, ASCII (`rivka-adler`, `lodz`, `rivka-adler-1946-1952`). Claim ids
+are `c-<yyyymmdd>-<3 digits>` (`c-20260904-017`).
+
+## `index.md`
+
+```markdown
+# Family memory: the life of Rivka Adler
+
+## People
+- [Rivka Adler](people/rivka-adler.md) — subject; b. 1931 Łódź (candidate); d. 2019 Haifa (confirmed)
+- [Miriam Adler](people/miriam-adler.md) — daughter, telling; living
+
+## Places
+- [Łódź](places/lodz.md) — birthplace (also "Lodz", "Litzmannstadt" 1940–45)
+
+## Eras
+- [Childhood in Łódź, 1931–1939](eras/rivka-adler-1931-1939.md)
+```
+
+## `people/<slug>.md`
+
+```markdown
+---
+name: Rivka Adler
+aka: [Rivka Adlerova, Regina Adler]
+born: { date: "1931", place: lodz, confidence: candidate }
+died: { date: "2019-03-02", place: haifa, confidence: confirmed }
+living: false
+relations:
+  - { to: miriam-adler, kind: daughter }
+---
+
+What we know, in one paragraph per era, each sentence traceable to a claim: ... (c-20260904-003)
+```
+
+`living: true` on any person means: every claim about them is `operator_only` and never appears
+in a draft, summary, or message to the group. Rule of thumb when unknown: born after
+(current year − 100) and no death event ⇒ treat as living.
+
+## `places/<slug>.md`
+
+```markdown
+---
+name: Łódź
+variants: [Lodz, Lodzh, Litzmannstadt (1940–1945)]
+country_today: Poland
+---
+```
+
+## `eras/<slug>.md`
+
+```markdown
+---
+person: rivka-adler
+years: "1931–1939"
+place: lodz
+people_present: [rivka-adler, chaim-adler]
+---
+
+Summary of the era from the claims, with claim ids in parentheses.
+```
+
+## `claims/<id>.md`
+
+The unit of truth. One fact per file. Never merged, never silently edited; a wrong claim is
+marked, not deleted.
+
+```markdown
+---
+id: c-20260904-017
+subject: rivka-adler
+statement: "Rivka's family lived at Kwiatowa 3 before the war."
+status: candidate          # candidate | confirmed | unproven | stranger | contradicted
+verified_by: interview     # interview | record | both
+operator_only: false
+sources:
+  - kind: told
+    by: miriam-adler
+    on: "2026-09-04"
+    quote: "Mum always said Kwiatowa 3, the one with the green gate."
+  - kind: record
+    url: "https://example.org/register/1939/172"
+    quote: "Adler, Chaim, Kwiatowa 3"
+    accessed: "2026-09-05"
+---
+
+Notes: why this status; what would change it.
+```
+
+Status ladder:
+
+- **candidate**: one source, plausible.
+- **confirmed**: two independent sources (two different tellers, or a teller and a record, or two
+  records). One source never confirms.
+- **unproven**: looked for, not found, with the search recorded. Not "false".
+- **stranger**: a record about a same-named different person. Kept so nobody re-finds it.
+- **contradicted**: two sources disagree. Both stay; the note says what each says.
+
+## `open-questions.md`
+
+```markdown
+- [ ] Which year did Rivka arrive in Haifa? — ask Miriam; fixes the 1946–1952 era boundary.
+- [ ] 1939 register scan needs a human to order it from the archive — blocks "Kwiatowa 3" going to confirmed.
+```
+
+One line each: the question, who can answer or what a person must do, why it matters.
