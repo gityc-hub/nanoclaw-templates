@@ -14,7 +14,8 @@ family-memory/
 ├── places/<slug>.md      # one place, with its name variants
 ├── eras/<slug>.md        # one period of one person's life
 ├── claims/<id>.md        # ONE fact each, with provenance and status
-└── open-questions.md     # what a human must answer or fetch
+├── open-questions.md     # what a human must answer or fetch
+└── log/<date>.md         # optional, agent-only: a researcher's search ledger; interviewers may ignore it
 ```
 
 Slugs are lowercase, hyphenated, ASCII (`rivka-adler`, `lodz`, `rivka-adler-1946-1952`). Claim ids
