@@ -92,7 +92,7 @@ marked, not deleted.
 id: rivka-adler-017
 subject: rivka-adler
 statement: "Rivka's family lived at Kwiatowa 3 before the war."
-status: candidate          # candidate | confirmed | unproven | stranger | contradicted
+status: candidate          # candidate | confirmed | unproven | stranger | contradicted | withdrawn
 verified_by: interview     # interview | record | both
 operator_only: false
 sources:
@@ -117,6 +117,12 @@ Status ladder:
 - **unproven**: looked for, not found, with the search recorded. Not "false".
 - **stranger**: a record about a same-named different person. Kept so nobody re-finds it.
 - **contradicted**: two sources disagree. Both stay; the note says what each says.
+- **withdrawn**: a verifier killed it (the quote is not on the page, the control was not a real
+  control, the page is gone). The file stays with the reason in the note; nothing else changes.
+
+A verifier only ever moves a claim down this list, never up, and never adds one. Claims whose only
+sources are `told` are outside the verifier's reach (there is no page to re-open); they are not
+stamped `verified` and stay `candidate` until a record arrives.
 
 ## `open-questions.md`
 
