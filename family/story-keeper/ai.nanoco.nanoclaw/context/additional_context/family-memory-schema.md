@@ -1,5 +1,7 @@
 # The family memory (`family-memory/`)
 
+`schema_version: 1`
+
 One folder, plain Markdown, readable by a person and by any agent. Two kinds of agent write it:
 an interviewer (this template) writes what people *told* it; a records researcher (for example
 the `family/historian` template) writes what documents *show*. Both use the same files, so a
@@ -16,7 +18,9 @@ family-memory/
 ```
 
 Slugs are lowercase, hyphenated, ASCII (`rivka-adler`, `lodz`, `rivka-adler-1946-1952`). Claim ids
-are `c-<yyyymmdd>-<3 digits>` (`c-20260904-017`).
+are `<subject-slug>-<3 digits>` (`rivka-adler-017`): the subject the claim is about, then the next
+unused number for that subject in `claims/`. Any agent writing a claim scans the folder first, so
+two agents never mint the same id.
 
 ## `index.md`
 
@@ -47,7 +51,7 @@ relations:
   - { to: miriam-adler, kind: daughter }
 ---
 
-What we know, in one paragraph per era, each sentence traceable to a claim: ... (c-20260904-003)
+What we know, in one paragraph per era, each sentence traceable to a claim: ... (rivka-adler-003)
 ```
 
 `living: true` on any person means: every claim about them is `operator_only` and never appears
@@ -84,7 +88,7 @@ marked, not deleted.
 
 ```markdown
 ---
-id: c-20260904-017
+id: rivka-adler-017
 subject: rivka-adler
 statement: "Rivka's family lived at Kwiatowa 3 before the war."
 status: candidate          # candidate | confirmed | unproven | stranger | contradicted
@@ -116,8 +120,12 @@ Status ladder:
 ## `open-questions.md`
 
 ```markdown
-- [ ] Which year did Rivka arrive in Haifa? — ask Miriam; fixes the 1946–1952 era boundary.
-- [ ] 1939 register scan needs a human to order it from the archive — blocks "Kwiatowa 3" going to confirmed.
+- [ ] (ask_family) Which year did Rivka arrive in Haifa? — ask Miriam; fixes the 1946–1952 era boundary.
+- [ ] (login_gated) 1939 register scan needs a human to order it from the archive — blocks "Kwiatowa 3" going to confirmed.
+- [ ] (not_indexed_yet) Town cemetery index not yet online — retry later.
 ```
 
-One line each: the question, who can answer or what a person must do, why it matters.
+One line each: a blocker kind in parentheses, the question, who can answer or what a person must
+do, why it matters. Blocker kinds, fixed list: `ask_family | login_gated | paid_index | image_only |
+living_person | not_indexed_yet | other`. An interviewer mostly writes `ask_family`; a records
+researcher writes the rest, and a scheduled retry may touch only `not_indexed_yet` lines.
