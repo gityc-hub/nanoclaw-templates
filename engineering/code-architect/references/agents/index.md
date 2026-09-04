@@ -34,7 +34,9 @@ risk that the seated experts do not cover.
   defensive controls.
 - [Cloud](cloud-architect.md): distributed, hosted, networked, or infrastructure
   systems.
-- [AI](ai-architect.md): foundation models, RAG, generative AI, and agents.
+- [AI](ai-architect.md): foundation models, RAG, generative AI, agents, and
+  conformance of skills, plugins, MCP servers, and agent instruction files to
+  their published standards.
 - [ML](ml-architect.md): datasets, training, predictive models, drift, and
   experimentation.
 - [Programming language](programming-language-expert.md): idioms and engineering

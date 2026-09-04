@@ -5,6 +5,8 @@
   "type": "object",
   "required": ["role", "book_practices", "options", "recommended_option", "assumptions"],
   "additionalProperties": false,
+  "if": { "properties": { "role": { "const": "ai" } } },
+  "then": { "required": ["standards_conformance"] },
   "properties": {
     "role": { "type": "string" },
     "book_practices": {
@@ -85,6 +87,24 @@
       "properties": {
         "name": { "type": "string", "description": "Must match one option's name." },
         "reason": { "type": "string", "description": "Why it wins against the stated constraints." }
+      }
+    },
+    "standards_conformance": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Required from the AI architect (role ai). One entry per artifact and standard pair for agent skills, plugins, MCP servers or clients, and agent instruction files in scope; a single not_applicable entry when the scope has none.",
+      "items": {
+        "type": "object",
+        "required": ["standard", "url", "artifact", "clause", "verdict", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "standard": { "enum": ["mcp", "agent-plugins", "agent-skills", "claude-agent-skills", "agents-md", "claude-md"] },
+          "url": { "enum": ["https://modelcontextprotocol.io/", "https://agent-plugins.org/", "https://agentskills.io/", "https://platform.claude.com/docs/en/agents-and-tools/agent-skills", "https://agents.md/", "https://claude.com/blog/using-claude-md-files"] },
+          "artifact": { "type": "string", "minLength": 1, "description": "The skill, plugin, MCP server or client, or instruction file checked, by path or name." },
+          "clause": { "type": "string", "minLength": 1, "description": "The section or rule of the standard that was checked." },
+          "verdict": { "enum": ["conforms", "deviates", "not_applicable"] },
+          "evidence": { "type": "string", "minLength": 1, "description": "What in the artifact shows the verdict; for not_applicable, why no such artifact is in scope." }
+        }
       }
     },
     "assumptions": {

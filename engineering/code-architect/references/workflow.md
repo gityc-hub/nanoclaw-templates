@@ -175,6 +175,12 @@ Tech lead sources:
   each insight, technology signal, or tradeoff applies to the concrete
   evidence.
 
+Standards conformance:
+
+- For every `standards_conformance` entry, open the named standard at its URL
+  and confirm the cited clause exists and supports the verdict. Reject an entry
+  whose clause cannot be found.
+
 Production proof:
 
 - For each major recommendation, option, or evolution step, record a

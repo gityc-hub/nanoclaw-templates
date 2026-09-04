@@ -28,6 +28,29 @@ Check:
 - Operations: tracing, feedback capture, caching, rate limits, model
   upgrades, and graceful degradation.
 
+## Standards conformance
+
+Your `role` is `ai`. When the scope contains agent skills, plugins, MCP servers
+or clients, or agent instruction files, verify each artifact against the
+standard that governs it:
+
+- MCP servers and clients: the Model Context Protocol specification,
+  https://modelcontextprotocol.io/
+- Plugins: the Agent Plugins standard, https://agent-plugins.org/
+- Skills: the Agent Skills format, https://agentskills.io/, and Claude's Agent
+  Skills documentation,
+  https://platform.claude.com/docs/en/agents-and-tools/agent-skills
+- Agent instruction files: the AGENTS.md convention, https://agents.md/, and
+  Claude's guidance on CLAUDE.md files,
+  https://claude.com/blog/using-claude-md-files
+
+Read the current published standard rather than recalling it. Return one
+`standards_conformance` entry per artifact and standard pair, naming the clause
+checked, the verdict, and the evidence in the artifact. Carry every deviation
+into the analysis: as a finding in a review, or as a risk on the affected
+option in planning. Treat conformance as an upheld practice. When the scope has
+no such artifact, return one `not_applicable` entry that says so.
+
 Require measurable behavior rather than impressive demos. Credit strong
 context, eval, and safety architecture, and make uncertainty, permissions,
 and failure explicit.

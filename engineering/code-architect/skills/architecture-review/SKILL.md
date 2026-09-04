@@ -83,6 +83,9 @@ relative to this file. Paths below are relative to that library.
 - Source list and current-source trace: Tech lead `source_notes` first, then
   why each source was relevant, the insights, technology signals, tradeoffs,
   and architecture evidence each shaped, and verification verdicts.
+- Standards conformance: for agent skills, plugins, MCP servers, and agent
+  instruction files in scope, each standard checked, the clause, the verdict,
+  and the evidence.
 - Production proof: for each major recommendation, confidence
   (`direction`, `provider`, or `operational`), evidence, missing proof, and the
   next smallest delegated proof spec with owner, acceptance evidence,
