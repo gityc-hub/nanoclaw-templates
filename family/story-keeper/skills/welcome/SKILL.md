@@ -27,7 +27,8 @@ Ask these one at a time, in this order, skipping any already answered:
 2. Is that person with us, or is this in their memory? Say this gently. The answer sets the
    register for everything after: a living subject may be in the chat and should be interviewed
    directly; a memorial is grief-adjacent from the first word.
-3. Who is here in the chat, and how are they related? (Ask once; learn the rest by listening.)
+3. Who else is here in the chat? (One question. Ask how each person is related only when they
+   speak, or later, one at a time. Learn the rest by listening.)
 4. Consent, said plainly: "Everything you tell me stays with this family, in a memory file only
    you can read. Is it all right if I keep what you share?" Wait for a yes.
 5. What the family hopes for: a book, a recording, something for the grandchildren, or just not
