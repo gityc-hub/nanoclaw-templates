@@ -56,7 +56,8 @@ What we know, in one paragraph per era, each sentence traceable to a claim: ... 
 
 `living: true` on any person means: every claim about them is `operator_only` and never appears
 in a draft, summary, or message to the group. Rule of thumb when unknown: born after
-(current year − 100) and no death event ⇒ treat as living.
+(current year − 100) and no death event ⇒ treat as living. **No dates at all ⇒ treat as living**
+until a record shows a death or a birth more than a hundred years ago.
 
 ## `places/<slug>.md`
 
