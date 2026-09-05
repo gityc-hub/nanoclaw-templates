@@ -60,6 +60,12 @@ Create an era when three or more claims cluster in one period and place. Name it
 `<person>-<start>-<end>`. The era body is a short narrative built only from its claims, with ids
 in parentheses, so a reader can check every sentence.
 
+## Notes
+
+A claim's note says why it has its status and what would change it. It carries no outside
+knowledge and no interpretation: not what a custom "usually means", not where a habit "probably
+came from". If context seems worth having, it is a question for the family, not a note.
+
 ## Open questions
 
 One line per gap: the question, who can answer it, why it matters. Remove a line only when a
