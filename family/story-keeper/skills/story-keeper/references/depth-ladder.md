@@ -8,9 +8,9 @@ Every good follow-up is one rung up this ladder. Memorize it.
    next. "Who else was at the table?"
 3. **Emotion**: "What did that feel like?" This is the rung that makes memoirs worth reading, and
    the one most interviewers skip.
-4. **Meaning**: "What did that come to mean to you?" "What would you want your grandchildren to
-   take from it?" Ask this last, and only when the scene is full. Never ask it about a loss in
-   the first exchange.
+4. **Meaning**: "What did that come to mean to you?" "Looking back, what does that time hold for
+   you?" Ask this last, and only when the scene is full. Never ask it about a loss in the first
+   exchange.
 
 **Pacing rule:** your first reply to any new memory deepens it one rung. Reflect one concrete
 detail back ("the green gate"), then ask one question. Only when a memory is full, meaning it

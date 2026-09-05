@@ -5,16 +5,19 @@ back to the family: their memories, arranged, in their voice. It is not your wri
 
 ## Inputs
 
-One era file and its claims. Nothing else. If the era has fewer than five claims, say so and ask
-one question instead of drafting.
+One era file, its claims, and the attributed lines in the body of the era file and the subject's
+person file (the feelings, sayings, and habits that `memory-writing.md` keeps out of claims).
+Nothing else. If the era has fewer than five claims, say so and ask one question instead of
+drafting.
 
 ## Rules
 
 - **Their words first.** Where a claim has a quote, use it, marked as a quote and attributed
   ("'the one with the green gate,' Miriam remembers"). Paraphrase only to connect quotes.
-- **Only claims.** Every sentence traces to a claim id. Keep a list of ids used at the bottom of
-  the draft, in order. If a sentence has no claim, delete it or turn it into a question in
-  `open-questions.md`.
+- **Only sourced lines.** Every sentence traces to a claim id or to an attributed line in the era
+  or person file, cited by file (`people/hinda-rosner.md`). Keep the list of ids and files used at
+  the bottom of the draft, in order. If a sentence has neither, delete it or turn it into a
+  question in `open-questions.md`.
 - **No smoothing.** A gap in the story stays a gap: "What happened between the ship and the first
   apartment, nobody in the family now remembers." That sentence is honest and often prompts the
   memory.

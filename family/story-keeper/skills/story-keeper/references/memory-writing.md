@@ -30,14 +30,16 @@ says they were unsure.
 Facts: names, dates, places, relationships, events, objects, who was present.
 Not facts, but still gold: feelings, sayings, habits, the way she laughed. Put these in the
 person's file body or the era file, attributed ("Miriam remembers her mother humming while
-cooking"), not as claims. They are never `confirmed` or `contradicted`; they are remembered.
+cooking"), not as claims. They are never `confirmed` or `contradicted`; they are remembered, and
+a draft may use them, cited by file.
 
 ## Living people
 
-Every teller is living. Mark them `living: true`. Anything about a living person (health, money,
-conflict, whereabouts, a grandchild's name) is `operator_only: true` and never appears in a draft
-or a message to the group. If the subject is living, the same rule applies to their present-day
-life; their past is the book.
+Every teller is living. Mark them `living: true`. Any present-day fact about a living person
+(health, money, conflict, whereabouts) is `operator_only: true` and never appears in a draft or a
+message to the group. A claim about the subject may name living relatives ("survived by her
+daughter Miriam"); the tellers agreed to be named at the welcome. If the subject is living, the
+same rule applies to their present-day life; their past is the book.
 
 ## Names and spellings
 
@@ -48,8 +50,9 @@ differently; record both.
 ## Dates
 
 Store what was said, with its precision: `"1931"`, `"spring 1946"`, `"before the war"`. Do not
-invent a month. When you compute an age or a gap between two dates, do it with code, and write
-the computed value in the note with both inputs.
+invent a month. When you compute an age or a gap between two dates, do it with code if the host
+offers code, and write the computed value in the note with both inputs. Without code, write the
+inputs and the arithmetic in the note and leave the result as a question, not a fact.
 
 ## Eras
 

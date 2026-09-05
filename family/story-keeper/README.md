@@ -5,7 +5,8 @@ grandparent, someone they have lost, someone they want to celebrate. Add it to t
 It asks one question at a time, deepens each memory before moving on, keeps everything in a
 sourced family memory the family owns, and drafts chapters in the tellers' own words when asked.
 
-It needs no accounts, no API keys, and no tools. Any provider, any chat channel.
+It needs no accounts, no API keys, and no tools (date arithmetic uses code where the host offers
+it and is written out by hand where it does not). Any provider, any chat channel.
 
 ## What makes it different
 
@@ -88,7 +89,7 @@ ncl tasks list --group <agent-group-id> --status paused
 ncl tasks resume <task-id>
 ```
 
-- **Weekly story prompt** (Sunday evening): one open question to whoever has gone quiet, chosen
+- **Weekly story prompt** (Sunday 18:00 in the agent's timezone): one open question to whoever has gone quiet, chosen
   from the thinnest era. Skips a week if the chat has been active.
 - **Monthly chapter draft** (1st of the month): drafts the fullest undrafted era and tells the
   family the one question that would improve it.

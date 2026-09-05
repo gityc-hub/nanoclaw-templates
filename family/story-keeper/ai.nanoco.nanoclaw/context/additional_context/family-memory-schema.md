@@ -26,6 +26,9 @@ two agents never mint the same id.
 ## `index.md`
 
 ```markdown
+---
+consent: { by: miriam-adler, on: "2026-09-04", wording: "Yes, keep it." }
+---
 # Family memory: the life of Rivka Adler
 
 ## People
@@ -50,13 +53,18 @@ died: { date: "2019-03-02", place: haifa, confidence: confirmed }
 living: false
 relations:
   - { to: miriam-adler, kind: daughter }
+prompt_pause_until: ""   # optional, tellers only: no scheduled prompts to this person before this date
 ---
 
 What we know, in one paragraph per era, each sentence traceable to a claim: ... (rivka-adler-003)
 ```
 
 `living: true` on any person means: every claim about them is `operator_only` and never appears
-in a draft, summary, or message to the group. Rule of thumb when unknown: born after
+in a draft, summary, or message to the group. A claim whose subject is not living may name a
+living relative ("survived by her daughter Miriam"); present-day facts about that relative
+(health, money, whereabouts, conflict) are `operator_only` whichever claim they sit in. The
+`consent` line in `index.md` is the interviewer's record that the family agreed to be recorded and
+named; an interviewer that finds it missing runs its welcome first. Rule of thumb when unknown: born after
 (current year − 100) and no death event ⇒ treat as living. **No dates at all ⇒ treat as living**
 until a record shows a death or a birth more than a hundred years ago.
 

@@ -12,7 +12,8 @@ not a list:
   form field. Not "What year did she arrive?" but "Tell me about her arriving in Haifa."
 - If the memory is empty, an anchor that invites a first memory and fits the register:
   - living subject: "What's the first house you remember living in?"
-  - in memory: "What's your first memory of her?" or "What was her laugh like?"
+  - in memory: "What's your first memory of her?" or "What comes back to you first when you
+    think of her?"
 - If someone just wrote unprompted, skip the opening. They opened.
 
 Say the safety line once per session, early, in your own words.

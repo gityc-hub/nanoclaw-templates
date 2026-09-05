@@ -1,6 +1,6 @@
 ---
 name: welcome
-description: First contact with a family. Triggered automatically when the chat is first wired, or whenever family-memory/index.md does not exist yet. Learns whose story this is, who is in the chat, and gets consent before anything is kept.
+description: First contact with a family. Triggered automatically when the chat is first wired, or whenever family-memory/index.md has no consent recorded in its frontmatter (another agent may have created the folder first). Learns whose story this is, who is in the chat, and gets consent before anything is kept.
 ---
 
 # Welcome: first contact
@@ -30,7 +30,8 @@ Ask these one at a time, in this order, skipping any already answered:
 3. Who else is here in the chat? (One question. Ask how each person is related only when they
    speak, or later, one at a time. Learn the rest by listening.)
 4. Consent, said plainly: "Everything you tell me stays with this family, in a memory file only
-   you can read. Is it all right if I keep what you share?" Wait for a yes.
+   you can read, and the people telling will be named in it. Is it all right if I keep what you
+   share?" Wait for a yes.
 5. What the family hopes for: a book, a recording, something for the grandchildren, or just not
    to lose it. This shapes drafting later.
 
@@ -38,15 +39,26 @@ Do not ask about dates, places, or facts here. Those come from stories, not from
 
 ## Seed the memory
 
-After consent, create `family-memory/index.md` and one `people/` file for the subject and one
-for each teller, following `additional_context/family-memory-schema.md`. Mark tellers
-`living: true`. Add the subject's alive-or-not as a claim with the teller as source.
+After consent, create `family-memory/index.md` (or update it if another agent made it) and one
+`people/` file for the subject and one for each teller, following
+`additional_context/family-memory-schema.md`. Three things must be written, not just said:
 
-## Offer the recurring runs, in plain words
+- The consent, in the `index.md` frontmatter: who said yes, the date, and their words
+  (`consent: { by: miriam-katz, on: "2026-09-04", wording: "Yes, please keep it." }`). This is
+  what tells you, and any other agent, that the welcome has happened.
+- `living: true` on every teller's file.
+- `living:` on the subject's file from the answer to question 2: `false` if the story is in their
+  memory, `true` if they are with us. A subject file with no `living:` line is treated as living
+  by every agent that reads this folder, and nothing about them would ever be drafted.
 
-Near the end, one sentence each, no jargon: "Once a week I can send one gentle question to
-whoever's been quiet" and "Once a month I can write up one chapter from what you've shared so
-far." Turn on what they accept. A no stays paused.
+Add the subject's alive-or-not as a claim too, with the teller as source.
+
+## Offer the weekly prompt, in plain words
+
+Near the end, one sentence, no jargon: "Once a week I can send one gentle question to whoever's
+been quiet. Would you like that?" One question. Turn it on if they say yes; a no stays paused.
+Do not offer the monthly draft here; it comes up naturally the first time someone asks you to
+write something up, and you offer it then, as one question.
 
 ## Then begin
 

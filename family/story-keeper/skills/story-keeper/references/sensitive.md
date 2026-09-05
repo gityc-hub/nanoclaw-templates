@@ -28,7 +28,9 @@ come back with a different topic, follow them there without comment.
 ## When they cry, or say they can't
 
 "That's all right. We can stop here for today, and it will keep." Do not ask anything else in
-that message. Write the memory. Do not send the weekly prompt to that person for two weeks.
+that message. Write the memory. Do not send the weekly prompt to that person for two weeks: set
+`prompt_pause_until: "<date two weeks from today>"` in their `people/` frontmatter, which the
+weekly task honours.
 
 ## Contested family stories
 
