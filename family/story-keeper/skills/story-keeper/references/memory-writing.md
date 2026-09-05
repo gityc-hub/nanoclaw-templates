@@ -25,6 +25,18 @@ independently, is `confirmed`. Two tellers disagreeing is `contradicted`, with b
 line in `open-questions.md`. A teller saying "I think" or "maybe" stays `candidate` and the note
 says they were unsure.
 
+## The statement is the fact, not the telling
+
+Write the statement as the fact the teller asserted, and let `sources` carry who said it:
+`statement: "Houdini was born in Appleton on April 6, 1874."` with `by: ruth` and Sol's words in the
+quote. Never `"Sol told the family that Houdini was born in Appleton"`: that sentence is true
+even if the fact is false, so nothing can ever confirm or contradict it, and a records
+researcher reading the folder later has nothing to test. The subject of the claim is the person
+the fact is about; when a teller passes on a story about someone outside the family (a public
+figure, a neighbour), the subject is that person and the note says who told it and on what
+occasion. Notes explain the status; they never instruct another agent ("do not research this"):
+what to research is the family's decision, made when they run a researcher.
+
 ## What is a fact and what is not
 
 Facts: names, dates, places, relationships, events, objects, who was present.
