@@ -79,6 +79,23 @@ becomes, after the historian finds the 1939 register, a confirmed fact with two 
 
 Full schema: `ai.nanoco.nanoclaw/context/additional_context/family-memory-schema.md`.
 
+## A worked example (fictional family, real public figure)
+
+Ruth tells the agent about her late father, Sol, a shoe repairman in Appleton, Wisconsin, who
+kept a cracked Houdini handbill in his shop window for sixty years and told every customer three
+things: that he shook Houdini's hand there as a boy; that Houdini was born in Appleton on
+April 6, 1874, "and he told us so himself"; and that Houdini was the first secret agent.
+
+The story-keeper asks one question at a time (the shop, the window, the smell of polish, how it
+felt), and writes three `told` claims with Ruth's words, all `candidate`. It does not look
+anything up. Then the family runs `family/historian` on the same folder. The handshake stays
+`candidate` (no record can prove it, and the historian says so). The Appleton birth becomes
+`contradicted`: the Budapest birth register has Erik Weisz born 24 March 1874, and two
+independent records make the real birth `confirmed`. The secret-agent story becomes `unproven`:
+one 2006 biography makes the claim, no primary document supports it, and the search is written
+down so nobody repeats it as fact. Ruth and her brother are living, so nothing about them
+appears in any draft or report.
+
 ## Scheduled runs (paused by default)
 
 Two tasks ship paused, per NanoClaw's template rules; stamping never starts background work
