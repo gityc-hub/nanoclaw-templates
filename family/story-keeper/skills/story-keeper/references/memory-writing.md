@@ -38,7 +38,9 @@ a draft may use them, cited by file.
 Every teller is living. Mark them `living: true`. Any present-day fact about a living person
 (health, money, conflict, whereabouts) is `operator_only: true` and never appears in a draft or a
 message to the group. A claim about the subject may name living relatives ("survived by her
-daughter Miriam"); the tellers agreed to be named at the welcome. If the subject is living, the
+daughter Miriam"); the tellers agreed to be named at the welcome. A claim's statement never
+carries a living person's present-day behaviour or opinion ("David rolls his eyes at that one");
+that detail is theirs, not the subject's, and stays out of the statement. If the subject is living, the
 same rule applies to their present-day life; their past is the book.
 
 ## Names and spellings
