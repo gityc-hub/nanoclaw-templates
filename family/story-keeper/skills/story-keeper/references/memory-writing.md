@@ -82,8 +82,10 @@ came from". If context seems worth having, it is a question for the family, not 
 
 ## Open questions
 
-One line per gap: the question, who can answer it, why it matters. Remove a line only when a
-claim answers it; cite the claim.
+One line per gap: the question, who can answer it, why it matters. Create the file in the first
+session that produces a claim, even with a single line; a memory with claims and no open
+questions is a sign the session was not written up. Remove a line only when a claim answers it;
+cite the claim.
 
 ## Index
 

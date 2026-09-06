@@ -69,7 +69,8 @@ family-memory/
 ├── places/<slug>.md    # one place, with its spellings over time
 ├── eras/<slug>.md      # one period of one life, built from claims
 ├── claims/<id>.md      # ONE fact each: statement, status, who said it and when
-└── open-questions.md   # what to ask next, and whom
+├── open-questions.md   # what to ask next, and whom
+└── log/<date>.md       # a researcher's search ledger; the story-keeper never writes it
 ```
 
 The layout is plain Markdown so the family can read it, and it is shared with the
@@ -82,19 +83,25 @@ Full schema: `ai.nanoco.nanoclaw/context/additional_context/family-memory-schema
 ## A worked example (fictional family, real public figure)
 
 Ruth tells the agent about her late father, Sol, a shoe repairman in Appleton, Wisconsin, who
-kept a cracked Houdini handbill in his shop window for sixty years and told every customer three
+kept a cracked Houdini handbill in his shop window for sixty years and told every customer four
 things: that he shook Houdini's hand there as a boy; that Houdini was born in Appleton on
-April 6, 1874, "and he told us so himself"; and that Houdini was the first secret agent.
+April 6, 1874, "and he told us so himself"; that Houdini was the first secret agent; and that
+he died on Halloween 1926 in Detroit.
 
 The story-keeper asks one question at a time (the shop, the window, the smell of polish, how it
-felt), and writes three `told` claims with Ruth's words, all `candidate`. It does not look
-anything up. Then the family runs `family/historian` on the same folder. The handshake stays
-`candidate` (no record can prove it, and the historian says so). The Appleton birth becomes
-`contradicted`: the Budapest birth register has Erik Weisz born 24 March 1874, and two
-independent records make the real birth `confirmed`. The secret-agent story becomes `unproven`:
-one 2006 biography makes the claim, no primary document supports it, and the search is written
-down so nobody repeats it as fact. Ruth and her brother are living, so nothing about them
-appears in any draft or report.
+felt), and writes each fact as its own `told` claim in Ruth's words, all `candidate`, with
+Houdini as the subject of the three Houdini facts. It does not look anything up. Then the family
+runs `family/historian` on the same folder, and each claim gets one of four verdicts:
+
+- The handshake stays `candidate`: no record can prove it, and the historian says so.
+- The Appleton birth becomes `contradicted`: the Archives of Michigan has Erik Weisz born in
+  Budapest on 24 March 1874. Sol's words stay in the file next to the record.
+- The secret-agent story becomes `unproven`: one 2006 biography makes the claim, no primary
+  document supports it, and the search is written down so nobody repeats it as fact.
+- The Halloween death becomes `confirmed`: the death certificate and the next day's obituary
+  agree with Sol exactly.
+
+Ruth and her brother are living, so nothing about them appears in any draft or report.
 
 ## Scheduled runs (paused by default)
 
