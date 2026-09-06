@@ -4,7 +4,7 @@
 
 One folder, plain Markdown, readable by a person and by any agent. Two kinds of agent write it:
 an interviewer (this template) writes what people *told* it; a records researcher (for example
-the `family/historian` template) writes what documents *show*. Both use the same files, so a
+the `lifestyle/historian` template) writes what documents *show*. Both use the same files, so a
 family can run either or both on one memory.
 
 ```

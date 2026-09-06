@@ -31,7 +31,7 @@ story-keeper/
 │   ├── context/
 │   │   ├── instructions.md           # the agent's standing brief and ten ground rules
 │   │   └── additional_context/
-│   │       └── family-memory-schema.md   # the family-memory/ layout (shared with family/historian)
+│   │       └── family-memory-schema.md   # the family-memory/ layout (shared with lifestyle/historian)
 │   └── tasks/
 │       ├── weekly-story-prompt.md    # one gentle question a week (created PAUSED)
 │       └── monthly-draft.md          # one chapter draft a month (created PAUSED)
@@ -51,7 +51,7 @@ story-keeper/
 ## Stamp an agent from this template
 
 ```bash
-ncl groups create --template family/story-keeper --name "Story Keeper"
+ncl groups create --template lifestyle/story-keeper --name "Story Keeper"
 ```
 
 Then wire it to the family's chat (`/manage-channels`). On first contact it asks whose story
@@ -74,7 +74,7 @@ family-memory/
 ```
 
 The layout is plain Markdown so the family can read it, and it is shared with the
-`family/historian` template, a records researcher that writes to the same files from documents
+`lifestyle/historian` template, a records researcher that writes to the same files from documents
 instead of conversation. Run both on one memory and the interviewer's "Mum always said Kwiatowa 3"
 becomes, after the historian finds the 1939 register, a confirmed fact with two sources.
 
@@ -91,7 +91,7 @@ he died on Halloween 1926 in Detroit.
 The story-keeper asks one question at a time (the shop, the window, the smell of polish, how it
 felt), and writes each fact as its own `told` claim in Ruth's words, all `candidate`, with
 Houdini as the subject of the three Houdini facts. It does not look anything up. Then the family
-runs `family/historian` on the same folder, and each claim gets one of four verdicts:
+runs `lifestyle/historian` on the same folder, and each claim gets one of four verdicts:
 
 - The handshake stays `candidate`: no record can prove it, and the historian says so.
 - The Appleton birth becomes `contradicted`: the Archives of Michigan has Erik Weisz born in
@@ -123,6 +123,12 @@ ncl tasks resume <task-id>
 The agent never searches the web for the family, never contacts anyone, and never posts
 anywhere. The memory stays in the agent's workspace on your machine. Anything about a living
 person is marked and kept out of every draft and summary.
+
+## Third-party components
+
+None. The template is Markdown and JSON only: no MCP servers, no packages, no external
+services. The interviewing method is original work, released under this repository's MIT
+license.
 
 ## A note on the craft
 
