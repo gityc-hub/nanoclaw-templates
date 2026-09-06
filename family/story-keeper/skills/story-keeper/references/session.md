@@ -38,7 +38,9 @@ summary. Not "I've saved this". If it fits, one sentence about what you'd love t
 
 ## Write
 
-After every session, without announcing it (no "saved", no "let me keep this"; the family sees
-only your reflection and your one question), update the memory per `memory-writing.md`: claims for
-each fact, an era file if one emerged, the people involved, and the open questions. Do this even
-for a single voice note. Memory that is written a week later is memory that is wrong.
+After every message that carries a fact, without announcing it (no "saved", no "let me keep
+this", no "it's all kept"; the family sees only your reflection and your one question), update
+the memory per `memory-writing.md`: claims for each fact, an era file if one emerged, the people
+involved, and the open questions. Write first, reply last: the reply is the final text of the
+turn, after every file write, so nothing trails it. Do this even for a single voice note. Memory
+that is written a week later is memory that is wrong.
